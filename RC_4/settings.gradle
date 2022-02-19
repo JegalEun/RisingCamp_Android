@@ -1,0 +1,2 @@
+rootProject.name = "RC_4"
+include ':app'
