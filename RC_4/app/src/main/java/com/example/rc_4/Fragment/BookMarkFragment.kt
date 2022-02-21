@@ -6,9 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.rc_4.CustomAdapter
+import com.example.rc_4.R
 import com.example.rc_4.databinding.FragmentBookmarkBinding
 
-data class ShoppingmallCard(val name : String, val contents:String)
+data class ShoppingmallCard(val name: String, val contents:String, val img: Int)
 class BookMarkFragment : Fragment() {
 
     private lateinit var binding : FragmentBookmarkBinding
@@ -18,11 +19,6 @@ class BookMarkFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        for(x in 0..10){
-            shoppingmallCardList.add(ShoppingmallCard("어텀","최대 1,000원 할인"))
-            shoppingmallCardList.add(ShoppingmallCard("원로그","최대 50,000원 할인"))
-            shoppingmallCardList.add(ShoppingmallCard("르헤르","최대 2,500원 할인"))
-        }
     }
 
     override fun onCreateView(
@@ -31,9 +27,19 @@ class BookMarkFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentBookmarkBinding.inflate(inflater, container, false)
+
+        for(x in 0..10){
+            shoppingmallCardList.add(ShoppingmallCard("아텀","최대 1,000원 할인", R.drawable.shopping_preview1))
+            shoppingmallCardList.add(ShoppingmallCard("원로그","최대 50,000원 할인", R.drawable.shopping_preview4))
+            shoppingmallCardList.add(ShoppingmallCard("페미니크","", R.drawable.shopping_preview2))
+            shoppingmallCardList.add(ShoppingmallCard("트렌디어패럴","최대 2,500원 할인", R.drawable.shopping_preview3))
+        }
         customAdapter = CustomAdapter(this.requireActivity(), shoppingmallCardList)
         binding.listBookMark.adapter = customAdapter
+
         return binding.root
+
+
     }
 
 }

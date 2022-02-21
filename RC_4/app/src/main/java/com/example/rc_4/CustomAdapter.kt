@@ -24,6 +24,7 @@ class CustomAdapter(context: Context, private val shoppingmallCardArraylist: Arr
         binding = ListviewBookMarkItemBinding.inflate(inflater,p2,false)
         binding.tvShoppingmallName.text = shoppingmallCardArraylist[p0].name
         binding.tvShoppingmallMaxSale.text = shoppingmallCardArraylist[p0].contents
+        binding.iVShoppingmallImg.setImageResource(shoppingmallCardArraylist[p0].img)
 
         return binding.root
     }
