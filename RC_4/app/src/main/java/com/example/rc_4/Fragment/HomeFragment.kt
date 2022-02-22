@@ -27,9 +27,9 @@ class HomeFragment: Fragment()  {
 
         for(x in 0..10){
             dataList.add(homeData("슬로우앤드","최대 [문의폭주!] #SLOWMADE.모먼트으으으으으으으으,000원 할인", "25%", "26,100", R.drawable.home_preview))
-            dataList.add(homeData("하우유","너피 반팔 부클 크롭 가디건(2Color)", null, "28,500", R.drawable.home_preview2))
-            dataList.add(homeData("위드윤","베를린 denim shirt", null, "32,000", R.drawable.home_preview3))
-            dataList.add(homeData("라룸","[자체제작] 라룸딥유넥티셔츠", null, "17,000", R.drawable.home_preview4))
+            dataList.add(homeData("하우유","너피 반팔 부클 크롭 가디건(2Color)", "", "28,500", R.drawable.home_preview2))
+            dataList.add(homeData("위드윤","베를린 denim shirt", "", "32,000", R.drawable.home_preview3))
+            dataList.add(homeData("라룸","[자체제작] 라룸딥유넥티셔츠", "", "17,000", R.drawable.home_preview4))
         }
         // 초기화
         recyclerViewAdapter = HomeRecyclerViewAdapter(this.requireActivity(), dataList)

@@ -1,5 +1,6 @@
 package com.example.rc_4
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -26,6 +27,11 @@ class HomeActivity: AppCompatActivity() {
         tabLayout = binding.tlHome
 
         supportFragmentManager.beginTransaction().add(R.id.ll_fragment,tab_home).commit()
+
+        binding.imgZzim.setOnClickListener {
+            val intent = Intent(this, ZzimActivity::class.java)
+            startActivity(intent)
+        }
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
