@@ -1,4 +1,4 @@
-package com.example.rc_4
+package com.example.rc_4.Adapter
 
 import android.content.Context
 import android.text.Layout
