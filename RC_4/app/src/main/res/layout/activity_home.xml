@@ -9,10 +9,11 @@
     <LinearLayout
         android:id="@+id/ll_tabbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navi"
         android:orientation="vertical">
 
         <LinearLayout
@@ -22,27 +23,31 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
             <ImageView
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:src="@drawable/logo"/>
             <View
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
             <LinearLayout
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
+                android:layout_width="220dp"
+                android:layout_height="40dp"
                 android:orientation="horizontal"
-                android:background="@drawable/search_radius">
+                android:gravity="center_vertical"
+                android:background="@drawable/edit_background"
+                android:paddingHorizontal="20dp">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:src="@drawable/search"/>
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:hint="검색어를 입력해주세요"
-                    android:textColorHint="@color/white"
+                    android:layout_marginStart="5dp"
+                    android:background="@null"
+                    android:textColorHint="#747C87"
                     android:textSize="13sp"/>
             </LinearLayout>
             <View
@@ -50,8 +55,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"/>
             <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:src="@drawable/cart"/>
         </LinearLayout>
         <com.google.android.material.tabs.TabLayout
@@ -84,20 +89,18 @@
                 android:text="세일"/>
 
         </com.google.android.material.tabs.TabLayout>
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
+        <LinearLayout
             android:id="@+id/ll_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginHorizontal="5dp"
             android:orientation="vertical">
-<!--            <fragment-->
-<!--                android:name="com.example.rc_4.Fragment.HomeFragment"-->
-<!--                android:id="@+id/fragment_home"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                app:layout_constraintTop_toBottomOf="@id/tl_store" />-->
+            <fragment
+                android:name="com.example.rc_4.Fragment.HomeFragment"
+                android:id="@+id/fragment_home"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@id/tl_store" />
 <!--            <fragment-->
 <!--                android:name="com.example.rc_4.Fragment.BrandFragment"-->
 <!--                android:id="@+id/fragment_brand"-->
@@ -114,7 +117,6 @@
 <!--                android:layout_width="match_parent"-->
 <!--                android:layout_height="match_parent" />-->
         </LinearLayout>
-        </ScrollView>
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
