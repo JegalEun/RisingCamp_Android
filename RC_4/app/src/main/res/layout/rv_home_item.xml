@@ -28,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/home_preview"
                     android:adjustViewBounds="true"/>
-                <CheckBox
+                <androidx.appcompat.widget.AppCompatCheckBox
                     android:id="@+id/cb_zzim"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
@@ -36,9 +36,9 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="8dp"
+                    android:background="@drawable/checkbox_zzim"
                     android:button="@null"
-                    android:layout_gravity="bottom|right"
-                    android:background="@drawable/zzim_unselected"/>
+                    android:layout_gravity="bottom|right" />
             </androidx.cardview.widget.CardView>
         </FrameLayout>
         <TextView

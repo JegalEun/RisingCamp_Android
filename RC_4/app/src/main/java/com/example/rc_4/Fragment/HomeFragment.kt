@@ -11,11 +11,13 @@ import com.example.rc_4.R
 import com.example.rc_4.databinding.FragmentHomeBinding
 
 data class homeData(var mall_name:String, var product_name:String, var sale: String?, val price:String, val img: Int)
+data class UserCheckBoxStatus(val position : Int, var isChecked:Boolean)
 class HomeFragment: Fragment()  {
 
     private lateinit var binding : FragmentHomeBinding
     private lateinit var recyclerViewAdapter: HomeRecyclerViewAdapter
     var dataList = ArrayList<homeData>()
+    var userCheckBoxStatus = ArrayList<UserCheckBoxStatus>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,8 +33,9 @@ class HomeFragment: Fragment()  {
             dataList.add(homeData("위드윤","베를린 denim shirt", "", "32,000", R.drawable.home_preview3))
             dataList.add(homeData("라룸","[자체제작] 라룸딥유넥티셔츠", "", "17,000", R.drawable.home_preview4))
         }
+
         // 초기화
-        recyclerViewAdapter = HomeRecyclerViewAdapter(this.requireActivity(), dataList)
+        recyclerViewAdapter = HomeRecyclerViewAdapter(this.requireActivity(), dataList, userCheckBoxStatus)
         // 어댑터 붙이기
         binding.rvHomeProduct.adapter = recyclerViewAdapter
         // 레이아웃 설정

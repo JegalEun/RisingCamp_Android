@@ -11,6 +11,7 @@
     <color name="line">#5F666E</color>
     <color name="blueText">#3041B6</color>
     <color name="zigzagpink">#CC1577</color>
+    <color name="myStatusBarColor">#191C20</color> <!-- status bar -->
 
 
 </resources>

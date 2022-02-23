@@ -31,15 +31,16 @@ class ZzimActivity : AppCompatActivity() {
         val sale : String = intent.getSerializableExtra("sale") as String
 //
 //        dataList.add(intent.getSerializableExtra("mall_name")as ZZimData)
-
-        for(x in 0..5){
-            dataList.add(ZZimData("슬로우앤드","최대 [문의폭주!] #SLOWMADE.모먼트으으으으으으으으,000원 할인", "25%", "26,100", R.drawable.home_preview))
-            dataList.add(ZZimData("하우유","너피 반팔 부클 크롭 가디건(2Color)", null, "28,500", R.drawable.home_preview2))
-            dataList.add(ZZimData("위드윤","베를린 denim shirt", null, "32,000", R.drawable.home_preview3))
-            dataList.add(ZZimData("라룸","[자체제작] 라룸딥유넥티셔츠", null, "17,000", R.drawable.home_preview4))
-        }
-
         dataList.add(ZZimData(mall_name,product_name, sale, price, img))
+
+//        for(x in 0..5){
+//            dataList.add(ZZimData("슬로우앤드","최대 [문의폭주!] #SLOWMADE.모먼트으으으으으으으으,000원 할인", "25%", "26,100", R.drawable.home_preview))
+//            dataList.add(ZZimData("하우유","너피 반팔 부클 크롭 가디건(2Color)", null, "28,500", R.drawable.home_preview2))
+//            dataList.add(ZZimData("위드윤","베를린 denim shirt", null, "32,000", R.drawable.home_preview3))
+//            dataList.add(ZZimData("라룸","[자체제작] 라룸딥유넥티셔츠", null, "17,000", R.drawable.home_preview4))
+//        }
+
+
 
         // 초기화
         recyclerViewAdapter = ZzimRecyclerViewAdapter(this, dataList)
