@@ -13,13 +13,14 @@ import com.example.rc_4.ZZimData
 import com.example.rc_4.ZzimActivity
 import com.example.rc_4.databinding.RvHomeItemBinding
 
-class HomeRecyclerViewAdapter(private val context: Context, private val dataList: ArrayList<homeData>, private val userCheckBoxStatus: ArrayList<UserCheckBoxStatus>) : RecyclerView.Adapter<HomeRecyclerViewAdapter.Holder>() {
+class HomeRecyclerViewAdapter(private val context: Context, private val dataList: ArrayList<homeData>): RecyclerView.Adapter<HomeRecyclerViewAdapter.Holder>() {
 
     lateinit var binding: RvHomeItemBinding
     private lateinit var recyclerViewAdapter: ZzimRecyclerViewAdapter
     var zzimList = ArrayList<ZZimData>()
 //    private lateinit var itemClickListener : OnItemClickListener
-//    private val userCheckBoxStatus = arrayListOf<UserCheckBoxStatus>()
+    private val userCheckBoxStatus = arrayListOf<UserCheckBoxStatus>()
+    private var ck = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         // viewholder를 생성하는 부분
@@ -29,7 +30,10 @@ class HomeRecyclerViewAdapter(private val context: Context, private val dataList
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         // 데이터 바인딩 될대마다 호출
-        holder.onBind(dataList[position],userCheckBoxStatus[position])
+        holder.onBind(dataList[position], position)
+
+        // null로 체크박스 초기화
+        holder.binding.cbZzim.setOnCheckedChangeListener(null)
 //        holder.itemView.setOnClickListener {
 //            itemClickListener.onClick(it,position)
 //        }
@@ -47,18 +51,23 @@ class HomeRecyclerViewAdapter(private val context: Context, private val dataList
 
     inner class Holder(val binding: RvHomeItemBinding) : RecyclerView.ViewHolder(binding.root) {
         //clickListener 설정
-        fun onBind(data: homeData, userStatus:UserCheckBoxStatus){
+        fun onBind(data: homeData, num: Int){
             binding.tvMallName.text = data.mall_name
             binding.tvProductName.text = data.product_name
             binding.tvPrice.text = data.price
             binding.ivProudctImg.setImageResource(data.img)
             binding.tvSale.text = data.sale
-            // 체크박스  유지
-            binding.cbZzim.isChecked = userStatus.isChecked
+
+            if(num >= userCheckBoxStatus.size)
+                userCheckBoxStatus.add(num, UserCheckBoxStatus(num, false))
+
+            binding.cbZzim.isChecked = userCheckBoxStatus[num].isChecked
 
 //          체크박스 눌렀을 때
             binding.cbZzim.setOnClickListener {
-                userStatus.isChecked = binding.cbZzim.isChecked
+
+                userCheckBoxStatus[num].isChecked = binding.cbZzim.isChecked
+
 //                zzimList.add(ZZimData(data.mall_name, data.product_name,data.sale,data.price,data.img))
                 Intent(context, ZzimActivity::class.java).apply {
                     putExtra("mall_name", data.mall_name)

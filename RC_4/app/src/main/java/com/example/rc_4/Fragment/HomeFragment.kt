@@ -35,7 +35,7 @@ class HomeFragment: Fragment()  {
         }
 
         // 초기화
-        recyclerViewAdapter = HomeRecyclerViewAdapter(this.requireActivity(), dataList, userCheckBoxStatus)
+        recyclerViewAdapter = HomeRecyclerViewAdapter(this.requireActivity(), dataList)
         // 어댑터 붙이기
         binding.rvHomeProduct.adapter = recyclerViewAdapter
         // 레이아웃 설정
