@@ -69,14 +69,28 @@ class HomeRecyclerViewAdapter(private val context: Context, private val dataList
                 userCheckBoxStatus[num].isChecked = binding.cbZzim.isChecked
 
 //                zzimList.add(ZZimData(data.mall_name, data.product_name,data.sale,data.price,data.img))
-                Intent(context, ZzimActivity::class.java).apply {
-                    putExtra("mall_name", data.mall_name)
-                    putExtra("product_name", data.product_name)
-                    putExtra("price", data.price)
-                    putExtra("img", data.img)
-                    putExtra("sale", data.sale)
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                }.run { context.startActivity(this) }
+
+                if(binding.cbZzim.isChecked) {
+                    // 체크 되었을 때
+                    Intent(context, ZzimActivity::class.java).apply {
+                        putExtra("mall_name", data.mall_name)
+                        putExtra("product_name", data.product_name)
+                        putExtra("price", data.price)
+                        putExtra("img", data.img)
+                        putExtra("sale", data.sale)
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    }.run { context.startActivity(this) }
+                }else {
+                    // 이미 찜일 경우
+                    Intent(context, ZzimActivity::class.java).apply {
+                        putExtra("mall_name", data.mall_name)
+                        putExtra("product_name", data.product_name)
+                        putExtra("price", data.price)
+                        putExtra("img", data.img)
+                        putExtra("sale", data.sale)
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    }
+                }
             }
         }
 
