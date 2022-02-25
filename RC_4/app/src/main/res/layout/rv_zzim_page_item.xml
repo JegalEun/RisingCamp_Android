@@ -36,11 +36,11 @@
                     android:layout_marginRight="10dp"
                     android:layout_marginTop="10dp"
                     android:layout_gravity="right">
-                    <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btn_zzim_delete"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:background="@drawable/delete" />
+<!--                    <androidx.appcompat.widget.AppCompatButton-->
+<!--                        android:id="@+id/btn_zzim_delete"-->
+<!--                        android:layout_width="30dp"-->
+<!--                        android:layout_height="30dp"-->
+<!--                        android:background="@drawable/delete" />-->
                 </androidx.cardview.widget.CardView>
             </androidx.cardview.widget.CardView>
         </FrameLayout>

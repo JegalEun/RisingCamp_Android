@@ -20,7 +20,6 @@ class HomeRecyclerViewAdapter(private val context: Context, private val dataList
     var zzimList = ArrayList<ZZimData>()
 //    private lateinit var itemClickListener : OnItemClickListener
     private val userCheckBoxStatus = arrayListOf<UserCheckBoxStatus>()
-    private var ck = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         // viewholder를 생성하는 부분

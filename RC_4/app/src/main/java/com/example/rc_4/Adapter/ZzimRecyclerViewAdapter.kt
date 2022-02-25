@@ -36,25 +36,25 @@ class ZzimRecyclerViewAdapter(private val context: Context, private val dataList
             binding.tvSale.text = data.sale
 
 //            // 삭제 버튼 누르면 리사이클러뷰에서 삭제
-            binding.btnZzimDelete.setOnClickListener {
-
-                // 삭제 버튼 누르면 리사이클러뷰에서 삭제
-                Intent(context, ZzimActivity::class.java).apply {
-                    putExtra("d_mall_name", data.mall_name)
-                    putExtra("d_product_name", data.product_name)
-                    putExtra("d_price", data.price)
-                    putExtra("d_img", data.img)
-                    putExtra("d_sale", data.sale)
-                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                }
-//                var bundle = Bundle()
-//                bundle.putString("mall_name", data.mall_name)
-//                bundle.putString("product_name", data.product_name)
-//                bundle.putString("price", data.price)
-//                bundle.putInt("img", data.img)
-//                bundle.putString("sale", data.sale)
-//                homeFragment.arguments=bundle
-            }
+//            binding.btnZzimDelete.setOnClickListener {
+//
+//                // 삭제 버튼 누르면 리사이클러뷰에서 삭제
+//                Intent(context, ZzimActivity::class.java).apply {
+//                    putExtra("d_mall_name", data.mall_name)
+//                    putExtra("d_product_name", data.product_name)
+//                    putExtra("d_price", data.price)
+//                    putExtra("d_img", data.img)
+//                    putExtra("d_sale", data.sale)
+//                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                }
+////                var bundle = Bundle()
+////                bundle.putString("mall_name", data.mall_name)
+////                bundle.putString("product_name", data.product_name)
+////                bundle.putString("price", data.price)
+////                bundle.putInt("img", data.img)
+////                bundle.putString("sale", data.sale)
+////                homeFragment.arguments=bundle
+//            }
 
 
         }

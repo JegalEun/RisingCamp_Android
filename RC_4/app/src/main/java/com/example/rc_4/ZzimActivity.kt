@@ -1,11 +1,15 @@
 package com.example.rc_4
 
+import DragAndDropAdapter
+import MyTouchHelperCallback
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.example.rc_4.Adapter.HomeRecyclerViewAdapter
 import com.example.rc_4.Adapter.ZzimRecyclerViewAdapter
-import com.example.rc_4.Fragment.homeData
 import com.example.rc_4.databinding.ActivityZzimPageBinding
 
 data class ZZimData(var mall_name:String, var product_name:String, var sale: String?, val price:String, val img: Int)
@@ -37,6 +41,7 @@ class ZzimActivity : AppCompatActivity() {
 
         if(intent.hasExtra("d_mall_name")) {
             // 받아온 값이 있으면
+                Log.d("와졌냐고", "doDvjds")
             val mall_name : String = intent.getSerializableExtra("d_mall_name") as String
             val product_name : String = intent.getSerializableExtra("d_product_name") as String
             val price : String = intent.getSerializableExtra("d_price") as String
@@ -67,8 +72,6 @@ class ZzimActivity : AppCompatActivity() {
             dataList.add(ZZimData("라룸","[자체제작] 라룸딥유넥티셔츠", null, "17,000", R.drawable.home_preview4))
         }
 
-
-
         // 초기화
         recyclerViewAdapter = ZzimRecyclerViewAdapter(this, dataList)
         recyclerViewAdapter.notifyDataSetChanged()
@@ -76,6 +79,17 @@ class ZzimActivity : AppCompatActivity() {
         binding.rvZzimPage.adapter = recyclerViewAdapter
         // 레이아웃 설정
         binding.rvZzimPage.layoutManager = GridLayoutManager(this,3)
+
+        val adapter = DragAndDropAdapter(dataList)
+        val callback = MyTouchHelperCallback(adapter)
+        val touchHelper = ItemTouchHelper(callback)
+        touchHelper.attachToRecyclerView(binding.rvZzimPage)
+        binding.rvZzimPage.adapter = adapter
+        adapter.startDrag(object : DragAndDropAdapter.OnStartDragListener {
+            override fun onStartDrag(viewHolder: RecyclerView.ViewHolder) {
+                touchHelper.startDrag(viewHolder)
+            }
+        })
 
 
     }
