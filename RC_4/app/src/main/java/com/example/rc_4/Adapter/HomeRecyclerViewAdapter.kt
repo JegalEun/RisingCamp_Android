@@ -16,9 +16,6 @@ import com.example.rc_4.databinding.RvHomeItemBinding
 class HomeRecyclerViewAdapter(private val context: Context, private val dataList: ArrayList<homeData>): RecyclerView.Adapter<HomeRecyclerViewAdapter.Holder>() {
 
     lateinit var binding: RvHomeItemBinding
-    private lateinit var recyclerViewAdapter: ZzimRecyclerViewAdapter
-    var zzimList = ArrayList<ZZimData>()
-//    private lateinit var itemClickListener : OnItemClickListener
     private val userCheckBoxStatus = arrayListOf<UserCheckBoxStatus>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -30,21 +27,7 @@ class HomeRecyclerViewAdapter(private val context: Context, private val dataList
     override fun onBindViewHolder(holder: Holder, position: Int) {
         // 데이터 바인딩 될대마다 호출
         holder.onBind(dataList[position], position)
-
-        // null로 체크박스 초기화
-        holder.binding.cbZzim.setOnCheckedChangeListener(null)
-//        holder.itemView.setOnClickListener {
-//            itemClickListener.onClick(it,position)
-//        }
     }
-
-//    interface OnItemClickListener {
-//        fun onClick(v: View, position:Int)
-//    }
-//
-//    fun setItemClickListener(onItemClickListener: OnItemClickListener){
-//        this.itemClickListener = onItemClickListener
-//    }
 
     override fun getItemCount(): Int = dataList.size
 
@@ -66,8 +49,6 @@ class HomeRecyclerViewAdapter(private val context: Context, private val dataList
             binding.cbZzim.setOnClickListener {
 
                 userCheckBoxStatus[num].isChecked = binding.cbZzim.isChecked
-
-//                zzimList.add(ZZimData(data.mall_name, data.product_name,data.sale,data.price,data.img))
 
                 if(binding.cbZzim.isChecked) {
                     // 체크 되었을 때

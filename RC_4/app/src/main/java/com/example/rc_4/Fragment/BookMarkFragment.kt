@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import com.example.rc_4.Adapter.CustomAdapter
 import com.example.rc_4.R
 import com.example.rc_4.databinding.FragmentBookmarkBinding
+
 
 data class ShoppingmallCard(val name: String, val contents:String, val img: Int)
 class BookMarkFragment : Fragment() {
@@ -16,10 +18,6 @@ class BookMarkFragment : Fragment() {
     private lateinit var customAdapter: CustomAdapter
     var shoppingmallCardList = ArrayList<ShoppingmallCard>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,8 +32,10 @@ class BookMarkFragment : Fragment() {
             shoppingmallCardList.add(ShoppingmallCard("페미니크","", R.drawable.shopping_preview2))
             shoppingmallCardList.add(ShoppingmallCard("트렌디어패럴","최대 2,500원 할인", R.drawable.shopping_preview3))
         }
+
         customAdapter = CustomAdapter(this.requireActivity(), shoppingmallCardList)
         binding.listBookMark.adapter = customAdapter
+        binding.listBookMark.isNestedScrollingEnabled=false
 
         return binding.root
 

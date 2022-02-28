@@ -16,7 +16,6 @@ import kotlin.collections.ArrayList
     MyTouchHelperCallback.OnItemMoveListener {
 
     private lateinit var dragListener: OnStartDragListener
-//    private lateinit var binding : ZzimActivity
     lateinit var binding: RvZzimPageItemBinding
 
     inner class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(

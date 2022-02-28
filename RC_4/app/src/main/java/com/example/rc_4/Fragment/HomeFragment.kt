@@ -18,15 +18,6 @@ class HomeFragment: Fragment()  {
     private lateinit var binding : FragmentHomeBinding
     private lateinit var recyclerViewAdapter: HomeRecyclerViewAdapter
     var dataList = ArrayList<homeData>()
-    var userCheckBoxStatus = ArrayList<UserCheckBoxStatus>()
-
-    private var mall_name: String? = null
-    private var product_name: String? = null
-    private var sale: String? = null
-    private var price: String? = null
-    private var img: Int? = null
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,17 +27,6 @@ class HomeFragment: Fragment()  {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        // 찜한 아이템에서 삭제할 아이템 정보 가져오기
-//
-//        if(mall_name.isNullOrBlank() && product_name.isNullOrBlank() && sale.isNullOrEmpty() && price.isNullOrEmpty()){
-//
-//        }
-        mall_name = arguments?.getString("mall_name")
-        product_name = arguments?.getString("product_name")
-        sale = arguments?.getString("sale")
-        price = arguments?.getString("price")
-        img = arguments?.getInt("img")
-
 
         for(x in 0..10){
             dataList.add(homeData("슬로우앤드","최대 [문의폭주!] #SLOWMADE.모먼트으으으으으으으으,000원 할인", "25%", "26,100", R.drawable.home_preview))
@@ -54,12 +34,6 @@ class HomeFragment: Fragment()  {
             dataList.add(homeData("위드윤","베를린 denim shirt", "", "32,000", R.drawable.home_preview3))
             dataList.add(homeData("라룸","[자체제작] 라룸딥유넥티셔츠", "", "17,000", R.drawable.home_preview4))
         }
-
-
-//        dataList.remove(mall_name?.let {
-//            // 찜한 아이템 액티비티에서 삭제버튼 누르면 삭제
-//            homeData(it,product_name,sale,price,img)
-//        })
 
         // 초기화
         recyclerViewAdapter = HomeRecyclerViewAdapter(this.requireActivity(), dataList)
