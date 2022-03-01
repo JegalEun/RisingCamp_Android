@@ -13,6 +13,7 @@ import android.view.View.OnLongClickListener
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.example.rc_thread_4.databinding.ActivityPlaitingBinding
 import java.util.*
 
@@ -23,8 +24,10 @@ class PlaitingActivity : AppCompatActivity() {
 
 
     private lateinit var timer : Timer
+    private lateinit var textTimer : Timer
     private lateinit var timerTask : TimerTask
     private val IMAGEVIEW_TAG = "드래그 이미지"
+    private var count = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +36,11 @@ class PlaitingActivity : AppCompatActivity() {
         setContentView(view)
 
         timer = Timer()
+        textTimer = Timer()
+
         TimerTask()
 
+        //음식 드래그
         binding.ivMandukgook.setTag(IMAGEVIEW_TAG)
         binding.ivMandukgook.setOnLongClickListener(LongClickListener())
         binding.ivOmelet.setTag(IMAGEVIEW_TAG)
@@ -56,7 +62,6 @@ class PlaitingActivity : AppCompatActivity() {
         binding.ivBokki.setTag(IMAGEVIEW_TAG)
         binding.ivBokki.setOnLongClickListener(LongClickListener())
 
-
         binding.llDish1.setOnDragListener(DragListener())
         binding.llDish2.setOnDragListener(DragListener())
         binding.llDish3.setOnDragListener(DragListener())
@@ -66,7 +71,34 @@ class PlaitingActivity : AppCompatActivity() {
         binding.llDish7.setOnDragListener(DragListener())
         binding.llDish8.setOnDragListener(DragListener())
 
+        // next 눌렀을 때 8가지 음식 모두 선택하지 않으면 다음으로 넘어가지 않음
+        binding.ivNext.setOnClickListener {
+            if(count<8){
+                TextTimer()
+            }else {
+                //채점으로 넘어가기
+            }
+        }
 
+
+    }
+
+    // " 8개 만두 골라주세요 " 3초만 보여주기
+    private fun TextTimer() {
+        timerTask = object : TimerTask() {
+            var count = 3
+            override fun run() {
+                binding.tvAlert.post(Runnable {
+                    if (count > 0) {
+                        binding.tvAlert.isVisible=true
+                    } else {
+                        binding.tvAlert.isVisible=false
+                    }
+                    count--
+                })
+            }
+        }
+        textTimer.schedule(timerTask, 0, 1000)
     }
 
     // 타이머
