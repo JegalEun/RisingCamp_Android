@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="dish">
+        <item>@drawable/mandu</item>
+        <item>@drawable/omelet</item>
+        <item>@drawable/red_mandu_rect</item>
+        <item>@drawable/mandu</item>
+        <item>@drawable/white_ando_zzim</item>
+        <item>@drawable/mandu_jeongol</item>
+        <item>@drawable/yoobu</item>
+        <item>@drawable/food</item>
+        <item>@drawable/tray_mandu</item>
+        <item>@drawable/bokki</item>
+        <item>@drawable/food2</item>
+        <item>@drawable/red_mandu</item>
+    </array>
+</resources>

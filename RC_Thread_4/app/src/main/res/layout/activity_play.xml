@@ -56,77 +56,77 @@
             app:layout_constraintTop_toBottomOf="@id/tv_timer"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintLeft_toLeftOf="parent">
-            <ImageView
-                android:id="@+id/iv_mandukgook"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/mandukgook"/>
-            <ImageView
-                android:id="@+id/iv_omelet"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/iv_mandukgook"
-                android:src="@drawable/omelet"/>
 
             <ImageView
-                android:id="@+id/iv_red_mandu_rect"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/iv_omelet"
-                android:src="@drawable/red_mandu_rect"/>
-            <ImageView
-                android:id="@+id/iv_mandu"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/iv_red_mandu_rect"
-                android:src="@drawable/mandu"/>
-            <ImageView
-                android:id="@+id/iv_white_ando_zzim"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/iv_mandu"
-                android:src="@drawable/white_ando_zzim"/>
-            <ImageView
-                android:id="@+id/iv_mandu_jeongol"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
+                android:id="@+id/iv_food1"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:src="@drawable/mandukgook"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/iv_mandukgook"
-                android:src="@drawable/mandu_jeongol"/>
-            <ImageView
-                android:id="@+id/iv_yoobu"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
-                app:layout_constraintTop_toBottomOf="@id/iv_mandukgook"
-                app:layout_constraintLeft_toRightOf="@+id/iv_mandu_jeongol"
-                android:src="@drawable/yoobu"/>
-            <ImageView
-                android:id="@+id/iv_bokki"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
-                app:layout_constraintTop_toBottomOf="@id/iv_mandukgook"
-                app:layout_constraintLeft_toRightOf="@+id/iv_yoobu"
-                android:src="@drawable/bokki"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:adjustViewBounds="true"/>
             <ImageView
                 android:id="@+id/iv_food2"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
-                app:layout_constraintTop_toBottomOf="@id/iv_mandukgook"
-                app:layout_constraintLeft_toRightOf="@+id/iv_bokki"
-                android:src="@drawable/food2"/>
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:src="@drawable/omelet"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/iv_food1"
+                android:layout_marginTop="20dp"/>
             <ImageView
-                android:id="@+id/iv_tray_mandu"
-                android:layout_width="100dp"
-                android:layout_height="70dp"
-                app:layout_constraintTop_toBottomOf="@id/iv_mandukgook"
-                app:layout_constraintLeft_toRightOf="@+id/iv_food2"
-                android:src="@drawable/tray_mandu"/>
+                android:id="@+id/iv_food3"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:src="@drawable/red_mandu_rect"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/iv_food2"
+                android:layout_marginTop="50dp"
+                android:adjustViewBounds="true"/>
+            <ImageView
+                android:id="@+id/iv_food4"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:src="@drawable/mandu"
+                app:layout_constraintLeft_toRightOf="@+id/iv_food3"
+                app:layout_constraintTop_toBottomOf="@+id/iv_food2"
+                android:adjustViewBounds="true"/>
+            <ImageView
+                android:id="@+id/iv_food5"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:src="@drawable/white_ando_zzim"
+                app:layout_constraintLeft_toRightOf="@+id/iv_food4"
+                app:layout_constraintTop_toBottomOf="@+id/iv_food1"
+                android:layout_marginTop="20dp"
+                android:adjustViewBounds="true"/>
+            <ImageView
+                android:id="@+id/iv_food6"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:src="@drawable/bokki"
+                app:layout_constraintTop_toBottomOf="@id/iv_food8"
+                app:layout_constraintLeft_toRightOf="@+id/iv_food5"
+                android:adjustViewBounds="true"/>
+            <ImageView
+                android:id="@+id/iv_food7"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:src="@drawable/tray_mandu"
+                app:layout_constraintLeft_toRightOf="@id/iv_food8"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="50dp"
+                android:adjustViewBounds="true"/>
+            <ImageView
+                android:id="@+id/iv_food8"
+                android:layout_width="70dp"
+                android:layout_height="50dp"
+                android:src="@drawable/white_ando_zzim"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toRightOf="@id/iv_food1"
+                android:layout_marginTop="20dp"
+                android:adjustViewBounds="true"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -121,7 +121,7 @@ class PlaitingActivity : AppCompatActivity() {
         timer.schedule(timerTask, 0, 1000)
     }
 
-    // 이미지 클릭 드래그 클래
+    // 이미지 클릭 드래그 클래스
     private class LongClickListener : OnLongClickListener {
         override fun onLongClick(view: View): Boolean {
 
