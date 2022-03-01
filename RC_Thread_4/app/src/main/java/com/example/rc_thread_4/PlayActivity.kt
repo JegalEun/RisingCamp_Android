@@ -10,16 +10,12 @@ import com.example.rc_thread_4.databinding.ActivityPlayBinding
 import java.util.*
 
 
-private var time = 10
-private var inRunning = false
-private lateinit var binding : ActivityPlayBinding
 
 class PlayActivity : AppCompatActivity() {
 
-
-//    private lateinit var timer : TimeHandler
     private lateinit var timer : Timer
     private lateinit var timerTask : TimerTask
+    private lateinit var binding : ActivityPlayBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityPlayBinding.inflate(layoutInflater)
@@ -32,12 +28,17 @@ class PlayActivity : AppCompatActivity() {
         //타이머
         TimerTask()
 
+        binding.ivNext.setOnClickListener {
+            val intent = Intent(this, PlaitingActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
     }
 
     //  이어서 하시겠습니까?
     override fun onRestart() {
         super.onRestart()
-        inRunning = true
     }
 
     // Shared에 유저 점수 저장
@@ -47,6 +48,7 @@ class PlayActivity : AppCompatActivity() {
 
     }
 
+    // 타이머
     private fun TimerTask() {
         timerTask = object : TimerTask() {
             var count = 10
@@ -67,17 +69,3 @@ class PlayActivity : AppCompatActivity() {
     }
 }
 
-// 타이머 클래스
-class TimeHandler : Handler() {
-
-    override fun handleMessage(msg: Message) {
-        super.handleMessage(msg)
-
-        if(time==0){
-            binding.tvTimer.setText(time)
-            removeMessages(0)
-        }
-        binding.tvTimer.setText(time--)
-        sendEmptyMessageDelayed(0, 1000)
-    }
-}
