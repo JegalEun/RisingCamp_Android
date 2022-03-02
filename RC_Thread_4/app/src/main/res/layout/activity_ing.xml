@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="30dp"
+    android:paddingVertical="30dp">
+
+    <TextView
+        android:id="@+id/tv_ing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/black"
+        android:text="이어서 하시겠습니까?."/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_yes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ing"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/cv_no"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:cardCornerRadius="10dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginTop="30dp"
+            android:textColor="#F15208"
+            android:text="네"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tv_ing"
+        app:layout_constraintLeft_toRightOf="@+id/cv_yes"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:cardCornerRadius="10dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_marginTop="30dp"
+            android:textColor="#F15208"
+            android:text="아니오"/>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

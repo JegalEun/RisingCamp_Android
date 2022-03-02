@@ -14,6 +14,8 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import com.example.rc3rd.CustomDialog
+import com.example.rc3rd.SharedPreferencesController
 import com.example.rc_thread_4.databinding.ActivityPlaitingBinding
 import java.util.*
 import kotlin.collections.ArrayList
@@ -23,6 +25,7 @@ import kotlin.collections.HashMap
 private lateinit var binding : ActivityPlaitingBinding
 private lateinit var drag_list : HashMap<String, Int>
 private var dish_count =0
+var score = 0
 
 class PlaitingActivity : AppCompatActivity() {
 
@@ -94,6 +97,21 @@ class PlaitingActivity : AppCompatActivity() {
         }
 
 
+    }
+
+    // 이어서 하시겠습니가?
+    override fun onRestart() {
+        super.onRestart()
+
+        val dialog = CustomDialog(this)
+        dialog.showDialog()
+
+        TimerTask()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        timerTask.cancel()
     }
 
     // " 8개 만두 골라주세요 " 3초만 보여주기
@@ -307,11 +325,15 @@ class PlaitingActivity : AppCompatActivity() {
 //                binding.tvCorrect.setText("틀렸습니다.")
 //            }
 //        }
+
+        // 점수 저장
+        SharedPreferencesController.setScore(this, score.toString())
     }
 
     // 채점 다 끝나고 다음으로 넘어가는 함수
     fun result(){
         val intent = Intent(this, ResultActivity::class.java)
+        intent.putExtra("score", score)
         startActivity(intent)
         finish()
     }

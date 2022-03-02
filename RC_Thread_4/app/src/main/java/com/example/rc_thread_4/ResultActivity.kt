@@ -6,8 +6,8 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.example.rc3rd.SharedPreferencesController
 import com.example.rc_thread_4.databinding.ActivityFinishBinding
-import com.example.rc_thread_4.databinding.ActivityPlayBinding
 
 class ResultActivity : AppCompatActivity() {
 
@@ -20,6 +20,9 @@ class ResultActivity : AppCompatActivity() {
         setContentView(view)
 
         var handler = Handler(Looper.getMainLooper())
+
+        // 점수 가져오기
+        var score = intent.getSerializableExtra("score") as Int
 
         val list = ArrayList<Int>()
         list.add(R.drawable.finish_one)
@@ -37,12 +40,33 @@ class ResultActivity : AppCompatActivity() {
             }
         }.start()
 
+        // 저장된 점수가 있다면 가져오기
+        if(SharedPreferencesController.getScore(this).toString().equals(0)){
+            val score_ing: String? = SharedPreferencesController.getScore(this)
+            val score_int = score_ing?.toInt()
+            if (score_ing != null) {
+                if (score_int != null) {
+                    score = score_int+score
+                }
+            }
+            binding.tvScore.setText("점수 : "+score)
+        }else {
+            // 저장된 점수가 없다면
+            binding.tvScore.setText("점수 : "+score)
+        }
+
         binding.ivReplay.setOnClickListener {
-            Log.d("으잉","왜?")
             val intent = Intent(this, PlayActivity::class.java)
             startActivity(intent)
             finish()
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        // 점수 SharedPreferences에 저장
+        SharedPreferencesController.setScore(this, score.toString())
     }
 
 }

@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.rc3rd.CustomDialog
 import com.example.rc_thread_4.databinding.ActivityPlayBinding
 import java.util.*
 
@@ -16,6 +17,7 @@ class PlayActivity : AppCompatActivity() {
     private lateinit var timerTask : TimerTask
     private lateinit var binding : ActivityPlayBinding
     private val list = arrayListOf(0,1,2,3,4,5,6,7)
+    var count : Int = 0
 
     // 음식 이미지 배열
     var images = intArrayOf(
@@ -95,19 +97,30 @@ class PlayActivity : AppCompatActivity() {
     //  이어서 하시겠습니까?
     override fun onRestart() {
         super.onRestart()
+
+        val dialog = CustomDialog(this)
+        dialog.showDialog()
+
+        TimerTask()
+
     }
 
-    // Shared에 유저 점수 저장
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onPause() {
+        super.onPause()
 
+        timerTask.cancel()
 
+    }
+
+    override fun onStop() {
+        super.onStop()
+        timerTask.cancel()
     }
 
     // 타이머
     private fun TimerTask() {
         timerTask = object : TimerTask() {
-            var count = 10
+            var count=10
             override fun run() {
                 binding.tvTimer.post(Runnable {
                     if (count > 0) {
