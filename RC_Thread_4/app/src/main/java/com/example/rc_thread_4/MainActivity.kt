@@ -1,11 +1,10 @@
 package com.example.rc_thread_4
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.media.MediaPlayer
 import android.os.Bundle
-import android.os.Handler
-import android.os.Message
-import android.util.Log
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import com.example.rc_thread_4.databinding.ActivityMainBinding
 
 
@@ -20,6 +19,19 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
+        var on = true
+        // 음악 실행
+        ServiceStart()
+
+        binding.ivMusicOnoff.setOnClickListener {
+            if(on){
+                ServiceStop()
+                on=false
+            }else {
+                on=true
+                ServiceStart()
+            }
+        }
         //how to play 눌렀을 때
         binding.ivHowtogame.setOnClickListener {
             val intent = Intent(this, HowtoGrameActivity::class.java)
@@ -35,4 +47,15 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+    fun ServiceStart(){
+        val intent = Intent(this, MusicService::class.java)
+        startService(intent)
+    }
+
+    fun ServiceStop(){
+        val intent = Intent(this, MusicService::class.java)
+        stopService(intent)
+    }
+
 }
