@@ -16,18 +16,23 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import com.example.rc_thread_4.databinding.ActivityPlaitingBinding
 import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 private lateinit var binding : ActivityPlaitingBinding
+private lateinit var drag_list : HashMap<String, Int>
+private var dish_count =0
 
 class PlaitingActivity : AppCompatActivity() {
-
 
     private lateinit var timer : Timer
     private lateinit var textTimer : Timer
     private lateinit var timerTask : TimerTask
     private val IMAGEVIEW_TAG = "드래그 이미지"
-    private var count = 0
+    private lateinit var list : ArrayList<Int>
+    private lateinit var array_img : IntArray
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,8 +42,12 @@ class PlaitingActivity : AppCompatActivity() {
 
         timer = Timer()
         textTimer = Timer()
-
         TimerTask()
+        drag_list = HashMap<String, Int>()
+
+        list = intent.getSerializableExtra("list") as ArrayList<Int>
+        array_img = intent.getSerializableExtra("array_img") as IntArray
+
 
         //음식 드래그
         binding.ivMandukgook.setTag(IMAGEVIEW_TAG)
@@ -73,10 +82,14 @@ class PlaitingActivity : AppCompatActivity() {
 
         // next 눌렀을 때 8가지 음식 모두 선택하지 않으면 다음으로 넘어가지 않음
         binding.ivNext.setOnClickListener {
-            if(count<8){
+            if(dish_count<8){
                 TextTimer()
             }else {
                 //채점으로 넘어가기
+                timer.cancel()
+                binding.tvTimer.isVisible=false
+                correnct()
+                result()
             }
         }
 
@@ -148,7 +161,7 @@ class PlaitingActivity : AppCompatActivity() {
         }
     }
 
-    internal class DragListener : OnDragListener {
+    class DragListener : OnDragListener {
 
         override fun onDrag(v: View, event: DragEvent): Boolean {
 
@@ -171,6 +184,7 @@ class PlaitingActivity : AppCompatActivity() {
                 }
                 DragEvent.ACTION_DROP -> {
                     // 이미지를 드래그하고 놓았을 때
+                    ++dish_count
                     Log.d("DragClickListener", "ACTION_DROP")
                     if (v === binding.llDish1) {
                         val view = event.localState as View
@@ -179,6 +193,8 @@ class PlaitingActivity : AppCompatActivity() {
 
                         val containView = v as LinearLayout
                         containView.addView(view)
+                        drag_list.put("1", view.id)
+                        Log.e("dd", view.toString())
                         view.visibility = View.VISIBLE
                         true
                     }
@@ -189,6 +205,7 @@ class PlaitingActivity : AppCompatActivity() {
 
                         val containView = v as LinearLayout
                         containView.addView(view)
+                        drag_list.put("2", view.id)
                         view.visibility = View.VISIBLE
                         true
                     }
@@ -199,6 +216,7 @@ class PlaitingActivity : AppCompatActivity() {
 
                         val containView = v as LinearLayout
                         containView.addView(view)
+                        drag_list.put("3", view.id)
                         view.visibility = View.VISIBLE
                         true
                     }
@@ -209,6 +227,7 @@ class PlaitingActivity : AppCompatActivity() {
 
                         val containView = v as LinearLayout
                         containView.addView(view)
+                        drag_list.put("4", view.id)
                         view.visibility = View.VISIBLE
                         true
                     }
@@ -219,6 +238,7 @@ class PlaitingActivity : AppCompatActivity() {
 
                         val containView = v as LinearLayout
                         containView.addView(view)
+                        drag_list.put("5", view.id)
                         view.visibility = View.VISIBLE
                         true
                     }
@@ -229,6 +249,7 @@ class PlaitingActivity : AppCompatActivity() {
 
                         val containView = v as LinearLayout
                         containView.addView(view)
+                        drag_list.put("6", view.id)
                         view.visibility = View.VISIBLE
                         true
                     }
@@ -239,6 +260,7 @@ class PlaitingActivity : AppCompatActivity() {
 
                         val containView = v as LinearLayout
                         containView.addView(view)
+                        drag_list.put("7", view.id)
                         view.visibility = View.VISIBLE
                         true
                     }
@@ -249,6 +271,7 @@ class PlaitingActivity : AppCompatActivity() {
 
                         val containView = v as LinearLayout
                         containView.addView(view)
+                        drag_list.put("8", view.id)
                         view.visibility = View.VISIBLE
                         true
                     }
@@ -270,29 +293,28 @@ class PlaitingActivity : AppCompatActivity() {
         }
     }
 
-//    // 터치 리스너
-//    override fun onTouch(view: View, motionEvent : MotionEvent): Boolean {
-//        return if (motionEvent.action == MotionEvent.ACTION_DOWN) {
-//            val dragShadowBuilder = View.DragShadowBuilder(view)
-//            view.startDrag(null,dragShadowBuilder, view, 0)
-//            true
-//        }else {
-//            false
-//        }
-//    }
-//
-//    override fun onDrag(p0: View?, p1: DragEvent?): Boolean {
-//        if (p1 != null) {
-//            when(p1.action) {
-//                DragEvent.ACTION_DROP -> {
-//                    val iv_1 = p1.localState as View
-//                    val iv_2 = iv_1.parent as ViewGroup
-//
-//                }
+    // 채점하는 함수
+    fun correnct(){
+        var dd = array_img[list[0]]
+        Log.e("dd",dd.toString())
+        var dddd = drag_list.get("1")
+        Log.e("dddd", dddd.toString())
+//        for(i in 1..8){
+//            if(drag_list.get(i.toString())?.equals(array_img[list[i-1]]) == true){
+//                binding.tvCorrect.isVisible=true
+//                binding.tvCorrect.setText("맞았습니다.")
+//            }else {
+//                binding.tvCorrect.setText("틀렸습니다.")
 //            }
 //        }
-//    }
+    }
 
+    // 채점 다 끝나고 다음으로 넘어가는 함수
+    fun result(){
+        val intent = Intent(this, ResultActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
 
 
 }

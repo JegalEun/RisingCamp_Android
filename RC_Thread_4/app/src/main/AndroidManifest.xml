@@ -20,6 +20,7 @@
         <activity android:name=".HowtoGrameActivity"/>
         <activity android:name=".PlayActivity"/>
         <activity android:name=".PlaitingActivity"/>
+        <activity android:name=".ResultActivity"/>
     </application>
 
 </manifest>

@@ -10,15 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.rc_thread_4.databinding.ActivityPlayBinding
 import java.util.*
 
-
-data class DishData(val img: Int, val checked: Boolean)
 class PlayActivity : AppCompatActivity() {
 
     private lateinit var timer : Timer
     private lateinit var timerTask : TimerTask
     private lateinit var binding : ActivityPlayBinding
-    private val dataList = arrayListOf<DishData>()
-    private val list = arrayListOf(1,2,3,4,5,6,7,8)
+    private val list = arrayListOf(0,1,2,3,4,5,6,7)
 
     // 음식 이미지 배열
     var images = intArrayOf(
@@ -33,8 +30,6 @@ class PlayActivity : AppCompatActivity() {
         R.drawable.bokki
     )
 
-    val range = (1..8)
-
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityPlayBinding.inflate(layoutInflater)
         val view = binding.root
@@ -45,32 +40,19 @@ class PlayActivity : AppCompatActivity() {
 
         //타이머
         TimerTask()
-        // 음식 사진 넣기
-        addDraw()
         // 사진배열 랜덤하게
         list.shuffle()
         setImage()
 
         binding.ivNext.setOnClickListener {
+            var ddd = images[list[0]]
+            Log.d("어떻게 하니,,", ddd.toString())
             val intent = Intent(this, PlaitingActivity::class.java)
+            intent.putExtra("list",list)
+            intent.putExtra("array_img",images)
             startActivity(intent)
             finish()
         }
-    }
-
-    fun addDraw() {
-//        dataList.add(DishData(R.drawable.mandukgook, false))
-//        dataList.add(DishData(R.drawable.omelet, false))
-//        dataList.add(DishData(R.drawable.red_mandu_rect, false))
-//        dataList.add(DishData(R.drawable.mandu, false))
-//        dataList.add(DishData(R.drawable.white_ando_zzim, false))
-//        dataList.add(DishData(R.drawable.mandu_jeongol, false))
-//        dataList.add(DishData(R.drawable.yoobu, false))
-//        dataList.add(DishData(R.drawable.food, false))
-//        dataList.add(DishData(R.drawable.food2, false))
-//        dataList.add(DishData(R.drawable.bokki, false))
-//        dataList.add(DishData(R.drawable.tray_mandu, false))
-//        dataList.add(DishData(R.drawable.red_mandu, false))
     }
 
     // 이미지 랜덤으로 배치
@@ -132,6 +114,8 @@ class PlayActivity : AppCompatActivity() {
                         binding.tvTimer.setText(count.toString())
                     } else {
                         val intent = Intent(applicationContext, PlaitingActivity::class.java)
+                        intent.putExtra("list",list)
+                        intent.putExtra("array_img",images)
                         startActivity(intent)
                         finish()
                     }
