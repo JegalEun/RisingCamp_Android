@@ -1,131 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/background"
-            android:adjustViewBounds="true"/>
+            android:adjustViewBounds="true"
+            android:src="@drawable/background" />
 
         <ImageView
             android:id="@+id/iv_next"
             android:layout_width="130dp"
             android:layout_height="60dp"
             android:adjustViewBounds="true"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/next"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:src="@drawable/next"/>
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/tv_timer"
             android:layout_width="60dp"
             android:layout_height="50dp"
-            android:text="1"
-            android:textSize="50dp"
-            android:gravity="center"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="55dp"
-            android:textColor="@color/orange"/>
+            android:gravity="center"
+            android:text="1"
+            android:textColor="@color/orange"
+            android:textSize="50dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:layout_width="400dp"
             android:layout_height="300dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_timer"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
             android:adjustViewBounds="true"
-            android:src="@drawable/table"/>
+            android:src="@drawable/table"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_timer" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="400dp"
             android:layout_height="300dp"
             android:layout_marginTop="50dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_timer"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/tv_timer">
 
             <ImageView
                 android:id="@+id/iv_food1"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
+                android:adjustViewBounds="true"
                 android:src="@drawable/mandukgook"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:adjustViewBounds="true"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/iv_food2"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
+                android:layout_marginTop="20dp"
                 android:src="@drawable/omelet"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/iv_food1"
-                android:layout_marginTop="20dp"/>
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/iv_food3"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
-                android:src="@drawable/red_mandu_rect"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/iv_food2"
                 android:layout_marginTop="50dp"
-                android:adjustViewBounds="true"/>
+                android:adjustViewBounds="true"
+                android:src="@drawable/red_mandu_rect"
+                app:layout_constraintRight_toLeftOf="@+id/iv_food2"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/iv_food4"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
+                android:adjustViewBounds="true"
                 android:src="@drawable/mandu"
                 app:layout_constraintLeft_toRightOf="@+id/iv_food3"
-                app:layout_constraintTop_toBottomOf="@+id/iv_food2"
-                android:adjustViewBounds="true"/>
+                app:layout_constraintTop_toBottomOf="@+id/iv_food2" />
+
             <ImageView
                 android:id="@+id/iv_food5"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
+                android:layout_marginTop="20dp"
+                android:adjustViewBounds="true"
                 android:src="@drawable/white_ando_zzim"
                 app:layout_constraintLeft_toRightOf="@+id/iv_food4"
-                app:layout_constraintTop_toBottomOf="@+id/iv_food1"
-                android:layout_marginTop="20dp"
-                android:adjustViewBounds="true"/>
+                app:layout_constraintTop_toBottomOf="@+id/iv_food1" />
+
             <ImageView
                 android:id="@+id/iv_food6"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
+                android:adjustViewBounds="true"
                 android:src="@drawable/bokki"
-                app:layout_constraintTop_toBottomOf="@id/iv_food8"
                 app:layout_constraintLeft_toRightOf="@+id/iv_food5"
-                android:adjustViewBounds="true"/>
+                app:layout_constraintTop_toBottomOf="@id/iv_food8" />
+
             <ImageView
                 android:id="@+id/iv_food7"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
+                android:layout_marginTop="50dp"
+                android:adjustViewBounds="true"
                 android:src="@drawable/tray_mandu"
                 app:layout_constraintLeft_toRightOf="@id/iv_food8"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="50dp"
-                android:adjustViewBounds="true"/>
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/iv_food8"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
-                android:src="@drawable/white_ando_zzim"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintLeft_toRightOf="@id/iv_food1"
                 android:layout_marginTop="20dp"
-                android:adjustViewBounds="true"/>
+                android:adjustViewBounds="true"
+                android:src="@drawable/white_ando_zzim"
+                app:layout_constraintLeft_toRightOf="@id/iv_food1"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

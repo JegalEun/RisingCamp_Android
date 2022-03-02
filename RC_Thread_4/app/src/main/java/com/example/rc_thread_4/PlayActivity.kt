@@ -3,6 +3,7 @@ package com.example.rc_thread_4
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -17,22 +18,22 @@ class PlayActivity : AppCompatActivity() {
     private lateinit var timerTask : TimerTask
     private lateinit var binding : ActivityPlayBinding
     private val dataList = arrayListOf<DishData>()
+    private val list = arrayListOf(1,2,3,4,5,6,7,8)
 
     // 음식 이미지 배열
     var images = intArrayOf(
         R.drawable.mandukgook,
         R.drawable.omelet,
-        R.drawable.red_mandu_rect,
         R.drawable.mandu,
         R.drawable.white_ando_zzim,
         R.drawable.mandu_jeongol,
         R.drawable.yoobu,
-        R.drawable.food,
         R.drawable.food2,
         R.drawable.tray_mandu,
-        R.drawable.bokki,
-        R.drawable.red_mandu,
+        R.drawable.bokki
     )
+
+    val range = (1..8)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityPlayBinding.inflate(layoutInflater)
@@ -45,6 +46,9 @@ class PlayActivity : AppCompatActivity() {
         //타이머
         TimerTask()
         // 음식 사진 넣기
+        addDraw()
+        // 사진배열 랜덤하게
+        list.shuffle()
         setImage()
 
         binding.ivNext.setOnClickListener {
@@ -52,11 +56,9 @@ class PlayActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
     }
 
-    // 이미지 랜덤으로 배치
-    fun setImage(){
+    fun addDraw() {
 //        dataList.add(DishData(R.drawable.mandukgook, false))
 //        dataList.add(DishData(R.drawable.omelet, false))
 //        dataList.add(DishData(R.drawable.red_mandu_rect, false))
@@ -69,31 +71,43 @@ class PlayActivity : AppCompatActivity() {
 //        dataList.add(DishData(R.drawable.bokki, false))
 //        dataList.add(DishData(R.drawable.tray_mandu, false))
 //        dataList.add(DishData(R.drawable.red_mandu, false))
+    }
+
+    // 이미지 랜덤으로 배치
+    fun setImage(){
 
         val mImageView: ImageView = findViewById<View>(R.id.iv_food1) as ImageView
-        val imageId = (Math.random() * images.size)
-        mImageView.setBackgroundResource(images[imageId.toInt()])
+        val imageId = list[0]
+        mImageView.setImageResource(images[imageId])
+        Log.d("imageId",imageId.toString())
         val mImageView2: ImageView = findViewById<View>(R.id.iv_food2) as ImageView
-        val imageId2 = (Math.random() * images.size)
-        mImageView2.setBackgroundResource(images[imageId2.toInt()])
+        val imageId2 = list[1]
+        Log.d("imageId",imageId2.toString())
+        mImageView2.setImageResource(images[imageId2])
         val mImageView3: ImageView = findViewById<View>(R.id.iv_food3) as ImageView
-        val imageId3 = (Math.random() * images.size)
-        mImageView3.setBackgroundResource(images[imageId3.toInt()])
+        val imageId3 = list[2]
+        Log.d("imageId",imageId3.toString())
+        mImageView3.setImageResource(images[imageId3])
         val mImageView4: ImageView = findViewById<View>(R.id.iv_food4) as ImageView
-        val imageId4 = (Math.random() * images.size)
-        mImageView4.setBackgroundResource(images[imageId4.toInt()])
+        val imageId4 = list[3]
+        Log.d("imageId",imageId4.toString())
+        mImageView4.setImageResource(images[imageId4])
         val mImageView5: ImageView = findViewById<View>(R.id.iv_food5) as ImageView
-        val imageId5 = (Math.random() * images.size)
-        mImageView5.setBackgroundResource(images[imageId5.toInt()])
+        val imageId5 = list[4]
+        Log.d("imageId",imageId5.toString())
+        mImageView5.setImageResource(images[imageId5])
         val mImageView6: ImageView = findViewById<View>(R.id.iv_food6) as ImageView
-        val imageId6 = (Math.random() * images.size)
-        mImageView6.setBackgroundResource(images[imageId6.toInt()])
+        val imageId6 = list[5]
+        Log.d("imageId",imageId6.toString())
+        mImageView6.setImageResource(images[imageId6])
         val mImageView7: ImageView = findViewById<View>(R.id.iv_food7) as ImageView
-        val imageId7 = (Math.random() * images.size)
-        mImageView7.setBackgroundResource(images[imageId7.toInt()])
+        val imageId7 = list[6]
+        Log.d("imageId",imageId7.toString())
+        mImageView7.setImageResource(images[imageId7])
         val mImageView8: ImageView = findViewById<View>(R.id.iv_food8) as ImageView
-        val imageId8 = (Math.random() * images.size)
-        mImageView8.setBackgroundResource(images[imageId8.toInt()])
+        val imageId8 = list[7]
+        Log.d("imageId",imageId8.toString())
+        mImageView8.setImageResource(images[imageId8])
     }
 
     //  이어서 하시겠습니까?
