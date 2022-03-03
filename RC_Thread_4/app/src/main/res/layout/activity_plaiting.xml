@@ -149,14 +149,14 @@
             android:gravity="center"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/ll_select2">
-            <LinearLayout
+            <ImageView
                 android:id="@+id/iv_mandukgook"
                 android:layout_width="80dp"
                 android:layout_height="60dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:orientation="horizontal"
-                android:background="@drawable/mandukgook"/>
+                android:src="@drawable/mandukgook"/>
             <LinearLayout
                 android:id="@+id/iv_omelet"
                 android:layout_width="80dp"

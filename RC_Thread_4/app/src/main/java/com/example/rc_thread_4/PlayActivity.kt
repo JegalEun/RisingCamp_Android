@@ -2,11 +2,13 @@ package com.example.rc_thread_4
 
 import android.content.Intent
 import android.content.res.Resources
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.toDrawable
 import com.example.rc3rd.CustomDialog
 import com.example.rc_thread_4.databinding.ActivityPlayBinding
 import java.util.*
@@ -16,10 +18,9 @@ class PlayActivity : AppCompatActivity() {
     private lateinit var timer : Timer
     private lateinit var timerTask : TimerTask
     private lateinit var binding : ActivityPlayBinding
-    private val list = arrayListOf(0,1,2,3,4,5,6,7)
+    private val list = arrayListOf(0,1,2,3,4,5,6,7,8)
     var count : Int = 0
 
-    // 음식 이미지 배열
     var images = intArrayOf(
         R.drawable.mandukgook,
         R.drawable.omelet,
@@ -48,7 +49,6 @@ class PlayActivity : AppCompatActivity() {
 
         binding.ivNext.setOnClickListener {
             var ddd = images[list[0]]
-            Log.d("어떻게 하니,,", ddd.toString())
             val intent = Intent(this, PlaitingActivity::class.java)
             intent.putExtra("list",list)
             intent.putExtra("array_img",images)
@@ -63,6 +63,8 @@ class PlayActivity : AppCompatActivity() {
         val mImageView: ImageView = findViewById<View>(R.id.iv_food1) as ImageView
         val imageId = list[0]
         mImageView.setImageResource(images[imageId])
+//        var dt = images[imageId].
+//        Log.d("dttdt",dt.toString())
         Log.d("imageId",imageId.toString())
         val mImageView2: ImageView = findViewById<View>(R.id.iv_food2) as ImageView
         val imageId2 = list[1]

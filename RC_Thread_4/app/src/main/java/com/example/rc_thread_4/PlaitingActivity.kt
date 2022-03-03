@@ -4,15 +4,18 @@ import android.content.ClipData
 import android.content.ClipDescription
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.DragEvent
 import android.view.View
-import android.view.View.OnDragListener
-import android.view.View.OnLongClickListener
+import android.view.View.*
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.core.view.isVisible
 import com.example.rc3rd.CustomDialog
 import com.example.rc3rd.SharedPreferencesController
@@ -23,7 +26,8 @@ import kotlin.collections.HashMap
 
 
 private lateinit var binding : ActivityPlaitingBinding
-private lateinit var drag_list : HashMap<String, Int>
+private lateinit var drag_list : HashMap<String, ViewGroup>
+private lateinit var image_list : IntArray
 private var dish_count =0
 var score = 0
 
@@ -32,10 +36,20 @@ class PlaitingActivity : AppCompatActivity() {
     private lateinit var timer : Timer
     private lateinit var textTimer : Timer
     private lateinit var timerTask : TimerTask
-    private val IMAGEVIEW_TAG = "드래그 이미지"
+    private val IMAGEVIEW_TAG_1 = "만두국"
+    private val IMAGEVIEW_TAG_2 = "오믈렛"
+    private val IMAGEVIEW_TAG_3 = "만두"
+    private val IMAGEVIEW_TAG_4 = "화이트"
+    private val IMAGEVIEW_TAG_5 = "만두전골"
+    private val IMAGEVIEW_TAG_6 = "유부"
+    private val IMAGEVIEW_TAG_7 = "food2"
+    private val IMAGEVIEW_TAG_8 = "tray"
+    private val IMAGEVIEW_TAG_9 = "떡볶이"
+    private val IMAGEVIEW_TAG_10 = "사각형빨"
+
+
     private lateinit var list : ArrayList<Int>
     private lateinit var array_img : IntArray
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,33 +60,36 @@ class PlaitingActivity : AppCompatActivity() {
         timer = Timer()
         textTimer = Timer()
         TimerTask()
-        drag_list = HashMap<String, Int>()
+        drag_list = HashMap<String, ViewGroup>()
+        image_list = IntArray(9)
 
         list = intent.getSerializableExtra("list") as ArrayList<Int>
         array_img = intent.getSerializableExtra("array_img") as IntArray
 
+        var handler = Handler(Looper.getMainLooper())
+        var isFinish = false
 
         //음식 드래그
-        binding.ivMandukgook.setTag(IMAGEVIEW_TAG)
+        binding.ivMandukgook.setTag(IMAGEVIEW_TAG_1)
         binding.ivMandukgook.setOnLongClickListener(LongClickListener())
-        binding.ivOmelet.setTag(IMAGEVIEW_TAG)
+        binding.ivOmelet.setTag(IMAGEVIEW_TAG_2)
         binding.ivOmelet.setOnLongClickListener(LongClickListener())
-        binding.ivRedManduRect.setTag(IMAGEVIEW_TAG)
-        binding.ivRedManduRect.setOnLongClickListener(LongClickListener())
-        binding.ivMandu.setTag(IMAGEVIEW_TAG)
+        binding.ivMandu.setTag(IMAGEVIEW_TAG_3)
         binding.ivMandu.setOnLongClickListener(LongClickListener())
-        binding.ivWhiteAndoZzim.setTag(IMAGEVIEW_TAG)
+        binding.ivWhiteAndoZzim.setTag(IMAGEVIEW_TAG_4)
         binding.ivWhiteAndoZzim.setOnLongClickListener(LongClickListener())
-        binding.ivManduJeongol.setTag(IMAGEVIEW_TAG)
+        binding.ivManduJeongol.setTag(IMAGEVIEW_TAG_5)
         binding.ivManduJeongol.setOnLongClickListener(LongClickListener())
-        binding.ivYoobu.setTag(IMAGEVIEW_TAG)
+        binding.ivYoobu.setTag(IMAGEVIEW_TAG_6)
         binding.ivYoobu.setOnLongClickListener(LongClickListener())
-        binding.ivFood2.setTag(IMAGEVIEW_TAG)
+        binding.ivFood2.setTag(IMAGEVIEW_TAG_7)
         binding.ivFood2.setOnLongClickListener(LongClickListener())
-        binding.ivTrayMandu.setTag(IMAGEVIEW_TAG)
+        binding.ivTrayMandu.setTag(IMAGEVIEW_TAG_8)
         binding.ivTrayMandu.setOnLongClickListener(LongClickListener())
-        binding.ivBokki.setTag(IMAGEVIEW_TAG)
+        binding.ivBokki.setTag(IMAGEVIEW_TAG_9)
         binding.ivBokki.setOnLongClickListener(LongClickListener())
+        binding.ivRedManduRect.setTag(IMAGEVIEW_TAG_10)
+        binding.ivRedManduRect.setOnLongClickListener(LongClickListener())
 
         binding.llDish1.setOnDragListener(DragListener())
         binding.llDish2.setOnDragListener(DragListener())
@@ -91,8 +108,7 @@ class PlaitingActivity : AppCompatActivity() {
                 //채점으로 넘어가기
                 timer.cancel()
                 binding.tvTimer.isVisible=false
-                correnct()
-                result()
+                correct(handler)
             }
         }
 
@@ -211,8 +227,37 @@ class PlaitingActivity : AppCompatActivity() {
 
                         val containView = v as LinearLayout
                         containView.addView(view)
-                        drag_list.put("1", view.id)
-                        Log.e("dd", view.toString())
+
+                        if(view.getTag().toString().equals("만두국")) {
+//                            drag_list.put("1", ))
+                            image_list[0]=0;
+                        }
+                        else if(view.getTag().toString().equals("오믈렛")) {
+                            image_list[1]=1;
+//                            Log.e("제발 ㅠ", view.getTag().toString())
+                        }
+                        else if(view.getTag().toString().equals("만두")) {
+                            image_list[2]=2;
+                        }
+                        else if(view.getTag().toString().equals("화이트")) {
+                            image_list[3]=3;
+                        }
+                        else if(view.getTag().toString().equals("만두전골")) {
+                            image_list[4]=4;
+                        }
+                        else if(view.getTag().toString().equals("유부")) {
+                            image_list[5]=5;
+                        }
+                        else if(view.getTag().toString().equals("food2")) {
+                            image_list[6]=6;
+                        }
+                        else if(view.getTag().toString().equals("tray")) {
+                            image_list[7]=7;
+                        }
+                        else if(view.getTag().toString().equals("떡볶이")) {
+                            image_list[8]=8;
+                        }
+
                         view.visibility = View.VISIBLE
                         true
                     }
@@ -223,7 +268,37 @@ class PlaitingActivity : AppCompatActivity() {
 
                         val containView = v as LinearLayout
                         containView.addView(view)
-                        drag_list.put("2", view.id)
+
+                        if(view.getTag().toString().equals("만두국")) {
+//                            drag_list.put("1", ))
+                            image_list[0]=0;
+                        }
+                        else if(view.getTag().toString().equals("오믈렛")) {
+                            image_list[1]=1;
+//                            Log.e("제발 ㅠ", view.getTag().toString())
+                        }
+                        else if(view.getTag().toString().equals("만두")) {
+                            image_list[2]=2;
+                        }
+                        else if(view.getTag().toString().equals("화이트")) {
+                            image_list[3]=3;
+                        }
+                        else if(view.getTag().toString().equals("만두전골")) {
+                            image_list[4]=4;
+                        }
+                        else if(view.getTag().toString().equals("유부")) {
+                            image_list[5]=5;
+                        }
+                        else if(view.getTag().toString().equals("food2")) {
+                            image_list[6]=6;
+                        }
+                        else if(view.getTag().toString().equals("tray")) {
+                            image_list[7]=7;
+                        }
+                        else if(view.getTag().toString().equals("떡볶이")) {
+                            image_list[8]=8;
+                        }
+
                         view.visibility = View.VISIBLE
                         true
                     }
@@ -234,7 +309,37 @@ class PlaitingActivity : AppCompatActivity() {
 
                         val containView = v as LinearLayout
                         containView.addView(view)
-                        drag_list.put("3", view.id)
+
+                        if(view.getTag().toString().equals("만두국")) {
+//                            drag_list.put("1", ))
+                            image_list[0]=0;
+                        }
+                        else if(view.getTag().toString().equals("오믈렛")) {
+                            image_list[1]=1;
+//                            Log.e("제발 ㅠ", view.getTag().toString())
+                        }
+                        else if(view.getTag().toString().equals("만두")) {
+                            image_list[2]=2;
+                        }
+                        else if(view.getTag().toString().equals("화이트")) {
+                            image_list[3]=3;
+                        }
+                        else if(view.getTag().toString().equals("만두전골")) {
+                            image_list[4]=4;
+                        }
+                        else if(view.getTag().toString().equals("유부")) {
+                            image_list[5]=5;
+                        }
+                        else if(view.getTag().toString().equals("food2")) {
+                            image_list[6]=6;
+                        }
+                        else if(view.getTag().toString().equals("tray")) {
+                            image_list[7]=7;
+                        }
+                        else if(view.getTag().toString().equals("떡볶이")) {
+                            image_list[8]=8;
+                        }
+
                         view.visibility = View.VISIBLE
                         true
                     }
@@ -245,7 +350,37 @@ class PlaitingActivity : AppCompatActivity() {
 
                         val containView = v as LinearLayout
                         containView.addView(view)
-                        drag_list.put("4", view.id)
+
+                        if(view.getTag().toString().equals("만두국")) {
+//                            drag_list.put("1", ))
+                            image_list[0]=0;
+                        }
+                        else if(view.getTag().toString().equals("오믈렛")) {
+                            image_list[1]=1;
+//                            Log.e("제발 ㅠ", view.getTag().toString())
+                        }
+                        else if(view.getTag().toString().equals("만두")) {
+                            image_list[2]=2;
+                        }
+                        else if(view.getTag().toString().equals("화이트")) {
+                            image_list[3]=3;
+                        }
+                        else if(view.getTag().toString().equals("만두전골")) {
+                            image_list[4]=4;
+                        }
+                        else if(view.getTag().toString().equals("유부")) {
+                            image_list[5]=5;
+                        }
+                        else if(view.getTag().toString().equals("food2")) {
+                            image_list[6]=6;
+                        }
+                        else if(view.getTag().toString().equals("tray")) {
+                            image_list[7]=7;
+                        }
+                        else if(view.getTag().toString().equals("떡볶이")) {
+                            image_list[8]=8;
+                        }
+
                         view.visibility = View.VISIBLE
                         true
                     }
@@ -256,7 +391,37 @@ class PlaitingActivity : AppCompatActivity() {
 
                         val containView = v as LinearLayout
                         containView.addView(view)
-                        drag_list.put("5", view.id)
+
+                        if(view.getTag().toString().equals("만두국")) {
+//                            drag_list.put("1", ))
+                            image_list[0]=0;
+                        }
+                        else if(view.getTag().toString().equals("오믈렛")) {
+                            image_list[1]=1;
+//                            Log.e("제발 ㅠ", view.getTag().toString())
+                        }
+                        else if(view.getTag().toString().equals("만두")) {
+                            image_list[2]=2;
+                        }
+                        else if(view.getTag().toString().equals("화이트")) {
+                            image_list[3]=3;
+                        }
+                        else if(view.getTag().toString().equals("만두전골")) {
+                            image_list[4]=4;
+                        }
+                        else if(view.getTag().toString().equals("유부")) {
+                            image_list[5]=5;
+                        }
+                        else if(view.getTag().toString().equals("food2")) {
+                            image_list[6]=6;
+                        }
+                        else if(view.getTag().toString().equals("tray")) {
+                            image_list[7]=7;
+                        }
+                        else if(view.getTag().toString().equals("떡볶이")) {
+                            image_list[8]=8;
+                        }
+
                         view.visibility = View.VISIBLE
                         true
                     }
@@ -267,7 +432,35 @@ class PlaitingActivity : AppCompatActivity() {
 
                         val containView = v as LinearLayout
                         containView.addView(view)
-                        drag_list.put("6", view.id)
+                        if(view.getTag().toString().equals("만두국")) {
+//                            drag_list.put("1", ))
+                            image_list[0]=0;
+                        }
+                        else if(view.getTag().toString().equals("오믈렛")) {
+                            image_list[1]=1;
+//                            Log.e("제발 ㅠ", view.getTag().toString())
+                        }
+                        else if(view.getTag().toString().equals("만두")) {
+                            image_list[2]=2;
+                        }
+                        else if(view.getTag().toString().equals("화이트")) {
+                            image_list[3]=3;
+                        }
+                        else if(view.getTag().toString().equals("만두전골")) {
+                            image_list[4]=4;
+                        }
+                        else if(view.getTag().toString().equals("유부")) {
+                            image_list[5]=5;
+                        }
+                        else if(view.getTag().toString().equals("food2")) {
+                            image_list[6]=6;
+                        }
+                        else if(view.getTag().toString().equals("tray")) {
+                            image_list[7]=7;
+                        }
+                        else if(view.getTag().toString().equals("떡볶이")) {
+                            image_list[8]=8;
+                        }
                         view.visibility = View.VISIBLE
                         true
                     }
@@ -278,7 +471,35 @@ class PlaitingActivity : AppCompatActivity() {
 
                         val containView = v as LinearLayout
                         containView.addView(view)
-                        drag_list.put("7", view.id)
+                        if(view.getTag().toString().equals("만두국")) {
+//                            drag_list.put("1", ))
+                            image_list[0]=0;
+                        }
+                        else if(view.getTag().toString().equals("오믈렛")) {
+                            image_list[1]=1;
+//                            Log.e("제발 ㅠ", view.getTag().toString())
+                        }
+                        else if(view.getTag().toString().equals("만두")) {
+                            image_list[2]=2;
+                        }
+                        else if(view.getTag().toString().equals("화이트")) {
+                            image_list[3]=3;
+                        }
+                        else if(view.getTag().toString().equals("만두전골")) {
+                            image_list[4]=4;
+                        }
+                        else if(view.getTag().toString().equals("유부")) {
+                            image_list[5]=5;
+                        }
+                        else if(view.getTag().toString().equals("food2")) {
+                            image_list[6]=6;
+                        }
+                        else if(view.getTag().toString().equals("tray")) {
+                            image_list[7]=7;
+                        }
+                        else if(view.getTag().toString().equals("떡볶이")) {
+                            image_list[8]=8;
+                        }
                         view.visibility = View.VISIBLE
                         true
                     }
@@ -289,7 +510,35 @@ class PlaitingActivity : AppCompatActivity() {
 
                         val containView = v as LinearLayout
                         containView.addView(view)
-                        drag_list.put("8", view.id)
+                        if(view.getTag().toString().equals("만두국")) {
+//                            drag_list.put("1", ))
+                            image_list[0]=0;
+                        }
+                        else if(view.getTag().toString().equals("오믈렛")) {
+                            image_list[1]=1;
+//                            Log.e("제발 ㅠ", view.getTag().toString())
+                        }
+                        else if(view.getTag().toString().equals("만두")) {
+                            image_list[2]=2;
+                        }
+                        else if(view.getTag().toString().equals("화이트")) {
+                            image_list[3]=3;
+                        }
+                        else if(view.getTag().toString().equals("만두전골")) {
+                            image_list[4]=4;
+                        }
+                        else if(view.getTag().toString().equals("유부")) {
+                            image_list[5]=5;
+                        }
+                        else if(view.getTag().toString().equals("food2")) {
+                            image_list[6]=6;
+                        }
+                        else if(view.getTag().toString().equals("tray")) {
+                            image_list[7]=7;
+                        }
+                        else if(view.getTag().toString().equals("떡볶이")) {
+                            image_list[8]=8;
+                        }
                         view.visibility = View.VISIBLE
                         true
                     }
@@ -312,19 +561,33 @@ class PlaitingActivity : AppCompatActivity() {
     }
 
     // 채점하는 함수
-    fun correnct(){
-        var dd = array_img[list[0]]
-        Log.e("dd",dd.toString())
-        var dddd = drag_list.get("1")
-        Log.e("dddd", dddd.toString())
-//        for(i in 1..8){
-//            if(drag_list.get(i.toString())?.equals(array_img[list[i-1]]) == true){
-//                binding.tvCorrect.isVisible=true
-//                binding.tvCorrect.setText("맞았습니다.")
-//            }else {
-//                binding.tvCorrect.setText("틀렸습니다.")
-//            }
-//        }
+    fun correct(handler: Handler){
+
+        var isFinish = false
+
+        Thread() {
+
+                for (i in 0..8) {
+                    Thread.sleep(1000)
+
+                    handler.post {
+                        var answer = list[i]
+                        Log.e("정답",answer.toString())
+                        var drag = image_list[list[i]]
+                        Log.e("내가 드래그한 음식", drag.toString())
+
+                        if(answer.equals(drag)==true){
+                            binding.tvCorrect.isVisible=true
+                            score++
+                            binding.tvCorrect.setText("맞았습니다.")
+                        }else {
+                            binding.tvCorrect.isVisible=true
+                            binding.tvCorrect.setText("틀렸습니다.")
+                        }
+                    }
+            }
+        }.start()
+
 
         // 점수 저장
         SharedPreferencesController.setScore(this, score.toString())
@@ -340,4 +603,8 @@ class PlaitingActivity : AppCompatActivity() {
 
 
 }
+
+
+
+
 
