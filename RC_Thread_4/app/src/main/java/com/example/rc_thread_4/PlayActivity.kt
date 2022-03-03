@@ -18,7 +18,7 @@ class PlayActivity : AppCompatActivity() {
     private lateinit var timer : Timer
     private lateinit var timerTask : TimerTask
     private lateinit var binding : ActivityPlayBinding
-    private val list = arrayListOf(0,1,2,3,4,5,6,7,8)
+    private val list = arrayListOf(0,1,2,3,4,5,6,7)
     var count : Int = 0
 
     var images = intArrayOf(
@@ -29,7 +29,6 @@ class PlayActivity : AppCompatActivity() {
         R.drawable.mandu_jeongol,
         R.drawable.yoobu,
         R.drawable.food2,
-        R.drawable.tray_mandu,
         R.drawable.bokki
     )
 

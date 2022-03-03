@@ -17,6 +17,7 @@ import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import androidx.core.view.isVisible
+import com.bumptech.glide.Glide
 import com.example.rc3rd.CustomDialog
 import com.example.rc3rd.SharedPreferencesController
 import com.example.rc_thread_4.databinding.ActivityPlaitingBinding
@@ -43,9 +44,7 @@ class PlaitingActivity : AppCompatActivity() {
     private val IMAGEVIEW_TAG_5 = "만두전골"
     private val IMAGEVIEW_TAG_6 = "유부"
     private val IMAGEVIEW_TAG_7 = "food2"
-    private val IMAGEVIEW_TAG_8 = "tray"
     private val IMAGEVIEW_TAG_9 = "떡볶이"
-    private val IMAGEVIEW_TAG_10 = "사각형빨"
 
 
     private lateinit var list : ArrayList<Int>
@@ -84,12 +83,8 @@ class PlaitingActivity : AppCompatActivity() {
         binding.ivYoobu.setOnLongClickListener(LongClickListener())
         binding.ivFood2.setTag(IMAGEVIEW_TAG_7)
         binding.ivFood2.setOnLongClickListener(LongClickListener())
-        binding.ivTrayMandu.setTag(IMAGEVIEW_TAG_8)
-        binding.ivTrayMandu.setOnLongClickListener(LongClickListener())
         binding.ivBokki.setTag(IMAGEVIEW_TAG_9)
         binding.ivBokki.setOnLongClickListener(LongClickListener())
-        binding.ivRedManduRect.setTag(IMAGEVIEW_TAG_10)
-        binding.ivRedManduRect.setOnLongClickListener(LongClickListener())
 
         binding.llDish1.setOnDragListener(DragListener())
         binding.llDish2.setOnDragListener(DragListener())
@@ -233,35 +228,32 @@ class PlaitingActivity : AppCompatActivity() {
                             image_list[0]=0;
                         }
                         else if(view.getTag().toString().equals("오믈렛")) {
-                            image_list[1]=1;
+                            image_list[0]=1;
 //                            Log.e("제발 ㅠ", view.getTag().toString())
                         }
                         else if(view.getTag().toString().equals("만두")) {
-                            image_list[2]=2;
+                            image_list[0]=2;
                         }
                         else if(view.getTag().toString().equals("화이트")) {
-                            image_list[3]=3;
+                            image_list[0]=3;
                         }
                         else if(view.getTag().toString().equals("만두전골")) {
-                            image_list[4]=4;
+                            image_list[0]=4;
                         }
                         else if(view.getTag().toString().equals("유부")) {
-                            image_list[5]=5;
+                            image_list[0]=5;
                         }
                         else if(view.getTag().toString().equals("food2")) {
-                            image_list[6]=6;
-                        }
-                        else if(view.getTag().toString().equals("tray")) {
-                            image_list[7]=7;
+                            image_list[0]=6;
                         }
                         else if(view.getTag().toString().equals("떡볶이")) {
-                            image_list[8]=8;
+                            image_list[0]=7;
                         }
 
                         view.visibility = View.VISIBLE
                         true
                     }
-                    if (v === binding.llDish2) {
+                    else if (v === binding.llDish2) {
                         val view = event.localState as View
                         val viewgroup = view.parent as ViewGroup
                         viewgroup.removeView(view)
@@ -271,38 +263,35 @@ class PlaitingActivity : AppCompatActivity() {
 
                         if(view.getTag().toString().equals("만두국")) {
 //                            drag_list.put("1", ))
-                            image_list[0]=0;
+                            image_list[1]=0;
                         }
                         else if(view.getTag().toString().equals("오믈렛")) {
                             image_list[1]=1;
 //                            Log.e("제발 ㅠ", view.getTag().toString())
                         }
                         else if(view.getTag().toString().equals("만두")) {
-                            image_list[2]=2;
+                            image_list[1]=2;
                         }
                         else if(view.getTag().toString().equals("화이트")) {
-                            image_list[3]=3;
+                            image_list[1]=3;
                         }
                         else if(view.getTag().toString().equals("만두전골")) {
-                            image_list[4]=4;
+                            image_list[1]=4;
                         }
                         else if(view.getTag().toString().equals("유부")) {
-                            image_list[5]=5;
+                            image_list[1]=5;
                         }
                         else if(view.getTag().toString().equals("food2")) {
-                            image_list[6]=6;
-                        }
-                        else if(view.getTag().toString().equals("tray")) {
-                            image_list[7]=7;
+                            image_list[1]=6;
                         }
                         else if(view.getTag().toString().equals("떡볶이")) {
-                            image_list[8]=8;
+                            image_list[1]=7;
                         }
 
                         view.visibility = View.VISIBLE
                         true
                     }
-                    if (v === binding.llDish3) {
+                    else if (v === binding.llDish3) {
                         val view = event.localState as View
                         val viewgroup = view.parent as ViewGroup
                         viewgroup.removeView(view)
@@ -312,38 +301,35 @@ class PlaitingActivity : AppCompatActivity() {
 
                         if(view.getTag().toString().equals("만두국")) {
 //                            drag_list.put("1", ))
-                            image_list[0]=0;
+                            image_list[2]=0;
                         }
                         else if(view.getTag().toString().equals("오믈렛")) {
-                            image_list[1]=1;
+                            image_list[2]=1;
 //                            Log.e("제발 ㅠ", view.getTag().toString())
                         }
                         else if(view.getTag().toString().equals("만두")) {
                             image_list[2]=2;
                         }
                         else if(view.getTag().toString().equals("화이트")) {
-                            image_list[3]=3;
+                            image_list[2]=3;
                         }
                         else if(view.getTag().toString().equals("만두전골")) {
-                            image_list[4]=4;
+                            image_list[2]=4;
                         }
                         else if(view.getTag().toString().equals("유부")) {
-                            image_list[5]=5;
+                            image_list[2]=5;
                         }
                         else if(view.getTag().toString().equals("food2")) {
-                            image_list[6]=6;
-                        }
-                        else if(view.getTag().toString().equals("tray")) {
-                            image_list[7]=7;
+                            image_list[2]=6;
                         }
                         else if(view.getTag().toString().equals("떡볶이")) {
-                            image_list[8]=8;
+                            image_list[2]=7;
                         }
 
                         view.visibility = View.VISIBLE
                         true
                     }
-                    if (v === binding.llDish4) {
+                    else if (v === binding.llDish4) {
                         val view = event.localState as View
                         val viewgroup = view.parent as ViewGroup
                         viewgroup.removeView(view)
@@ -353,38 +339,35 @@ class PlaitingActivity : AppCompatActivity() {
 
                         if(view.getTag().toString().equals("만두국")) {
 //                            drag_list.put("1", ))
-                            image_list[0]=0;
+                            image_list[3]=0;
                         }
                         else if(view.getTag().toString().equals("오믈렛")) {
-                            image_list[1]=1;
+                            image_list[3]=1;
 //                            Log.e("제발 ㅠ", view.getTag().toString())
                         }
                         else if(view.getTag().toString().equals("만두")) {
-                            image_list[2]=2;
+                            image_list[3]=2;
                         }
                         else if(view.getTag().toString().equals("화이트")) {
                             image_list[3]=3;
                         }
                         else if(view.getTag().toString().equals("만두전골")) {
-                            image_list[4]=4;
+                            image_list[3]=4;
                         }
                         else if(view.getTag().toString().equals("유부")) {
-                            image_list[5]=5;
+                            image_list[3]=5;
                         }
                         else if(view.getTag().toString().equals("food2")) {
-                            image_list[6]=6;
-                        }
-                        else if(view.getTag().toString().equals("tray")) {
-                            image_list[7]=7;
+                            image_list[3]=6;
                         }
                         else if(view.getTag().toString().equals("떡볶이")) {
-                            image_list[8]=8;
+                            image_list[3]=7;
                         }
 
                         view.visibility = View.VISIBLE
                         true
                     }
-                    if (v === binding.llDish5) {
+                    else if (v === binding.llDish5) {
                         val view = event.localState as View
                         val viewgroup = view.parent as ViewGroup
                         viewgroup.removeView(view)
@@ -394,38 +377,35 @@ class PlaitingActivity : AppCompatActivity() {
 
                         if(view.getTag().toString().equals("만두국")) {
 //                            drag_list.put("1", ))
-                            image_list[0]=0;
+                            image_list[4]=0;
                         }
                         else if(view.getTag().toString().equals("오믈렛")) {
-                            image_list[1]=1;
+                            image_list[4]=1;
 //                            Log.e("제발 ㅠ", view.getTag().toString())
                         }
                         else if(view.getTag().toString().equals("만두")) {
-                            image_list[2]=2;
+                            image_list[4]=2;
                         }
                         else if(view.getTag().toString().equals("화이트")) {
-                            image_list[3]=3;
+                            image_list[4]=3;
                         }
                         else if(view.getTag().toString().equals("만두전골")) {
                             image_list[4]=4;
                         }
                         else if(view.getTag().toString().equals("유부")) {
-                            image_list[5]=5;
+                            image_list[4]=5;
                         }
                         else if(view.getTag().toString().equals("food2")) {
-                            image_list[6]=6;
-                        }
-                        else if(view.getTag().toString().equals("tray")) {
-                            image_list[7]=7;
+                            image_list[4]=6;
                         }
                         else if(view.getTag().toString().equals("떡볶이")) {
-                            image_list[8]=8;
+                            image_list[4]=7;
                         }
 
                         view.visibility = View.VISIBLE
                         true
                     }
-                    if (v === binding.llDish6) {
+                    else if (v === binding.llDish6) {
                         val view = event.localState as View
                         val viewgroup = view.parent as ViewGroup
                         viewgroup.removeView(view)
@@ -434,37 +414,34 @@ class PlaitingActivity : AppCompatActivity() {
                         containView.addView(view)
                         if(view.getTag().toString().equals("만두국")) {
 //                            drag_list.put("1", ))
-                            image_list[0]=0;
+                            image_list[5]=0;
                         }
                         else if(view.getTag().toString().equals("오믈렛")) {
-                            image_list[1]=1;
+                            image_list[5]=1;
 //                            Log.e("제발 ㅠ", view.getTag().toString())
                         }
                         else if(view.getTag().toString().equals("만두")) {
-                            image_list[2]=2;
+                            image_list[5]=2;
                         }
                         else if(view.getTag().toString().equals("화이트")) {
-                            image_list[3]=3;
+                            image_list[5]=3;
                         }
                         else if(view.getTag().toString().equals("만두전골")) {
-                            image_list[4]=4;
+                            image_list[5]=4;
                         }
                         else if(view.getTag().toString().equals("유부")) {
                             image_list[5]=5;
                         }
                         else if(view.getTag().toString().equals("food2")) {
-                            image_list[6]=6;
-                        }
-                        else if(view.getTag().toString().equals("tray")) {
-                            image_list[7]=7;
+                            image_list[5]=6;
                         }
                         else if(view.getTag().toString().equals("떡볶이")) {
-                            image_list[8]=8;
+                            image_list[5]=7;
                         }
                         view.visibility = View.VISIBLE
                         true
                     }
-                    if (v === binding.llDish7) {
+                    else if (v === binding.llDish7) {
                         val view = event.localState as View
                         val viewgroup = view.parent as ViewGroup
                         viewgroup.removeView(view)
@@ -473,37 +450,34 @@ class PlaitingActivity : AppCompatActivity() {
                         containView.addView(view)
                         if(view.getTag().toString().equals("만두국")) {
 //                            drag_list.put("1", ))
-                            image_list[0]=0;
+                            image_list[6]=0;
                         }
                         else if(view.getTag().toString().equals("오믈렛")) {
-                            image_list[1]=1;
+                            image_list[6]=1;
 //                            Log.e("제발 ㅠ", view.getTag().toString())
                         }
                         else if(view.getTag().toString().equals("만두")) {
-                            image_list[2]=2;
+                            image_list[6]=2;
                         }
                         else if(view.getTag().toString().equals("화이트")) {
-                            image_list[3]=3;
+                            image_list[6]=3;
                         }
                         else if(view.getTag().toString().equals("만두전골")) {
-                            image_list[4]=4;
+                            image_list[6]=4;
                         }
                         else if(view.getTag().toString().equals("유부")) {
-                            image_list[5]=5;
+                            image_list[6]=5;
                         }
                         else if(view.getTag().toString().equals("food2")) {
                             image_list[6]=6;
                         }
-                        else if(view.getTag().toString().equals("tray")) {
-                            image_list[7]=7;
-                        }
                         else if(view.getTag().toString().equals("떡볶이")) {
-                            image_list[8]=8;
+                            image_list[6]=7;
                         }
                         view.visibility = View.VISIBLE
                         true
                     }
-                    if (v === binding.llDish8) {
+                    else if (v === binding.llDish8) {
                         val view = event.localState as View
                         val viewgroup = view.parent as ViewGroup
                         viewgroup.removeView(view)
@@ -512,32 +486,29 @@ class PlaitingActivity : AppCompatActivity() {
                         containView.addView(view)
                         if(view.getTag().toString().equals("만두국")) {
 //                            drag_list.put("1", ))
-                            image_list[0]=0;
+                            image_list[7]=0;
                         }
                         else if(view.getTag().toString().equals("오믈렛")) {
-                            image_list[1]=1;
+                            image_list[7]=1;
 //                            Log.e("제발 ㅠ", view.getTag().toString())
                         }
                         else if(view.getTag().toString().equals("만두")) {
-                            image_list[2]=2;
+                            image_list[7]=2;
                         }
                         else if(view.getTag().toString().equals("화이트")) {
-                            image_list[3]=3;
+                            image_list[7]=3;
                         }
                         else if(view.getTag().toString().equals("만두전골")) {
-                            image_list[4]=4;
+                            image_list[7]=4;
                         }
                         else if(view.getTag().toString().equals("유부")) {
-                            image_list[5]=5;
+                            image_list[7]=5;
                         }
                         else if(view.getTag().toString().equals("food2")) {
-                            image_list[6]=6;
-                        }
-                        else if(view.getTag().toString().equals("tray")) {
-                            image_list[7]=7;
+                            image_list[7]=6;
                         }
                         else if(view.getTag().toString().equals("떡볶이")) {
-                            image_list[8]=8;
+                            image_list[7]=7;
                         }
                         view.visibility = View.VISIBLE
                         true
@@ -567,23 +538,144 @@ class PlaitingActivity : AppCompatActivity() {
 
         Thread() {
 
-                for (i in 0..8) {
+                for (i in 0..7) {
                     Thread.sleep(1000)
 
                     handler.post {
                         var answer = list[i]
                         Log.e("정답",answer.toString())
-                        var drag = image_list[list[i]]
+                        var drag = image_list[i]
                         Log.e("내가 드래그한 음식", drag.toString())
 
-                        if(answer.equals(drag)==true){
+                        if(answer.equals(drag)==true) {
                             binding.tvCorrect.isVisible=true
-                            score++
                             binding.tvCorrect.setText("맞았습니다.")
-                        }else {
+                            score++
+                            binding.tvScore.setText(score.toString())
+                            binding.tvScore.isVisible=true
+                        }
+                        else {
                             binding.tvCorrect.isVisible=true
                             binding.tvCorrect.setText("틀렸습니다.")
+                            binding.tvScore.setText(score.toString())
+                            binding.tvScore.isVisible=true
                         }
+
+//                        when(i){
+//                            0 -> {
+//                                if(answer.equals(drag)==true){
+//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish1);
+//                                    binding.llDish1.isVisible=true
+//                                    binding.tvCorrect.isVisible=true
+//                                    score++
+//                                    binding.tvCorrect.setText("맞았습니다.")
+//                                }
+//                                else {
+//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish1);
+//                                    binding.ivDish1.isVisible=true
+//                                    binding.tvCorrect.isVisible=true
+//                                    binding.tvCorrect.setText("틀렸습니다.")
+//                                }
+//                            }
+//                            1 -> {
+//                                if(answer.equals(drag)==true){
+//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish2);
+//                                    binding.ivDish2.isVisible=true
+//                                    binding.tvCorrect.isVisible=true
+//                                    score++
+//                                    binding.tvCorrect.setText("맞았습니다.")
+//                                }else {
+//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish2);
+//                                    binding.ivDish2.isVisible=true
+//                                    binding.tvCorrect.isVisible=true
+//                                    binding.tvCorrect.setText("틀렸습니다.")
+//                                }
+//                            }
+//                            2 -> {
+//                                if(answer.equals(drag)==true){
+//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish3);
+//                                    binding.ivDish3.isVisible=true
+//                                    binding.tvCorrect.isVisible=true
+//                                    score++
+//                                    binding.tvCorrect.setText("맞았습니다.")
+//                                }else {
+//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish3);
+//                                    binding.ivDish3.isVisible=true
+//                                    binding.tvCorrect.isVisible=true
+//                                    binding.tvCorrect.setText("틀렸습니다.")
+//                                }
+//                            }
+//                            3 -> {
+//                                if(answer.equals(drag)==true){
+//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish4);
+//                                    binding.ivDish4.isVisible=true
+//                                    binding.tvCorrect.isVisible=true
+//                                    score++
+//                                    binding.tvCorrect.setText("맞았습니다.")
+//                                }else {
+//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish4);
+//                                    binding.ivDish4.isVisible=true
+//                                    binding.tvCorrect.isVisible=true
+//                                    binding.tvCorrect.setText("틀렸습니다.")
+//                                }
+//                            }
+//                            4 -> {
+//                                if(answer.equals(drag)==true){
+//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish5);
+//                                    binding.ivDish5.isVisible=true
+//                                    binding.tvCorrect.isVisible=true
+//                                    score++
+//                                    binding.tvCorrect.setText("맞았습니다.")
+//                                }else {
+//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish5);
+//                                    binding.ivDish5.isVisible=true
+//                                    binding.tvCorrect.isVisible=true
+//                                    binding.tvCorrect.setText("틀렸습니다.")
+//                                }
+//                            }
+//                            5 -> {
+//                                if(answer.equals(drag)==true){
+//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish6);
+//                                    binding.ivDish6.isVisible=true
+//                                    binding.tvCorrect.isVisible=true
+//                                    score++
+//                                    binding.tvCorrect.setText("맞았습니다.")
+//                                }else {
+//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish6);
+//                                    binding.ivDish6.isVisible=true
+//                                    binding.tvCorrect.isVisible=true
+//                                    binding.tvCorrect.setText("틀렸습니다.")
+//                                }
+//                            }
+//                            6 -> {
+//                                if(answer.equals(drag)==true){
+//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish7);
+//                                    binding.ivDish7.isVisible=true
+//                                    binding.tvCorrect.isVisible=true
+//                                    score++
+//                                    binding.tvCorrect.setText("맞았습니다.")
+//                                }else {
+//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish7);
+//                                    binding.ivDish7.isVisible=true
+//                                    binding.tvCorrect.isVisible=true
+//                                    binding.tvCorrect.setText("틀렸습니다.")
+//                                }
+//                            }
+//                            else -> {
+//                                if(answer.equals(drag)==true){
+//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish8);
+//                                    binding.ivDish8.isVisible=true
+//                                    binding.tvCorrect.isVisible=true
+//                                    score++
+//                                    binding.tvCorrect.setText("맞았습니다.")
+//                                }else {
+//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish8);
+//                                    binding.ivDish8.isVisible=true
+//                                    binding.tvCorrect.isVisible=true
+//                                    binding.tvCorrect.setText("틀렸습니다.")
+//                                }
+//                            }
+//                        }
                     }
             }
         }.start()
