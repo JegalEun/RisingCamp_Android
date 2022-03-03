@@ -104,7 +104,12 @@ class PlaitingActivity : AppCompatActivity() {
                 timer.cancel()
                 binding.tvTimer.isVisible=false
                 correct(handler)
+                isFinish=true
             }
+        }
+
+        if(isFinish){
+            result()
         }
 
 
@@ -547,140 +552,141 @@ class PlaitingActivity : AppCompatActivity() {
                         var drag = image_list[i]
                         Log.e("내가 드래그한 음식", drag.toString())
 
-                        if(answer.equals(drag)==true) {
-                            binding.tvCorrect.isVisible=true
-                            binding.tvCorrect.setText("맞았습니다.")
-                            score++
-                            binding.tvScore.setText(score.toString())
-                            binding.tvScore.isVisible=true
-                        }
-                        else {
-                            binding.tvCorrect.isVisible=true
-                            binding.tvCorrect.setText("틀렸습니다.")
-                            binding.tvScore.setText(score.toString())
-                            binding.tvScore.isVisible=true
-                        }
-
-//                        when(i){
-//                            0 -> {
-//                                if(answer.equals(drag)==true){
-//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish1);
-//                                    binding.llDish1.isVisible=true
-//                                    binding.tvCorrect.isVisible=true
-//                                    score++
-//                                    binding.tvCorrect.setText("맞았습니다.")
-//                                }
-//                                else {
-//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish1);
-//                                    binding.ivDish1.isVisible=true
-//                                    binding.tvCorrect.isVisible=true
-//                                    binding.tvCorrect.setText("틀렸습니다.")
-//                                }
-//                            }
-//                            1 -> {
-//                                if(answer.equals(drag)==true){
-//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish2);
-//                                    binding.ivDish2.isVisible=true
-//                                    binding.tvCorrect.isVisible=true
-//                                    score++
-//                                    binding.tvCorrect.setText("맞았습니다.")
-//                                }else {
-//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish2);
-//                                    binding.ivDish2.isVisible=true
-//                                    binding.tvCorrect.isVisible=true
-//                                    binding.tvCorrect.setText("틀렸습니다.")
-//                                }
-//                            }
-//                            2 -> {
-//                                if(answer.equals(drag)==true){
-//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish3);
-//                                    binding.ivDish3.isVisible=true
-//                                    binding.tvCorrect.isVisible=true
-//                                    score++
-//                                    binding.tvCorrect.setText("맞았습니다.")
-//                                }else {
-//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish3);
-//                                    binding.ivDish3.isVisible=true
-//                                    binding.tvCorrect.isVisible=true
-//                                    binding.tvCorrect.setText("틀렸습니다.")
-//                                }
-//                            }
-//                            3 -> {
-//                                if(answer.equals(drag)==true){
-//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish4);
-//                                    binding.ivDish4.isVisible=true
-//                                    binding.tvCorrect.isVisible=true
-//                                    score++
-//                                    binding.tvCorrect.setText("맞았습니다.")
-//                                }else {
-//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish4);
-//                                    binding.ivDish4.isVisible=true
-//                                    binding.tvCorrect.isVisible=true
-//                                    binding.tvCorrect.setText("틀렸습니다.")
-//                                }
-//                            }
-//                            4 -> {
-//                                if(answer.equals(drag)==true){
-//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish5);
-//                                    binding.ivDish5.isVisible=true
-//                                    binding.tvCorrect.isVisible=true
-//                                    score++
-//                                    binding.tvCorrect.setText("맞았습니다.")
-//                                }else {
-//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish5);
-//                                    binding.ivDish5.isVisible=true
-//                                    binding.tvCorrect.isVisible=true
-//                                    binding.tvCorrect.setText("틀렸습니다.")
-//                                }
-//                            }
-//                            5 -> {
-//                                if(answer.equals(drag)==true){
-//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish6);
-//                                    binding.ivDish6.isVisible=true
-//                                    binding.tvCorrect.isVisible=true
-//                                    score++
-//                                    binding.tvCorrect.setText("맞았습니다.")
-//                                }else {
-//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish6);
-//                                    binding.ivDish6.isVisible=true
-//                                    binding.tvCorrect.isVisible=true
-//                                    binding.tvCorrect.setText("틀렸습니다.")
-//                                }
-//                            }
-//                            6 -> {
-//                                if(answer.equals(drag)==true){
-//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish7);
-//                                    binding.ivDish7.isVisible=true
-//                                    binding.tvCorrect.isVisible=true
-//                                    score++
-//                                    binding.tvCorrect.setText("맞았습니다.")
-//                                }else {
-//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish7);
-//                                    binding.ivDish7.isVisible=true
-//                                    binding.tvCorrect.isVisible=true
-//                                    binding.tvCorrect.setText("틀렸습니다.")
-//                                }
-//                            }
-//                            else -> {
-//                                if(answer.equals(drag)==true){
-//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish8);
-//                                    binding.ivDish8.isVisible=true
-//                                    binding.tvCorrect.isVisible=true
-//                                    score++
-//                                    binding.tvCorrect.setText("맞았습니다.")
-//                                }else {
-//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish8);
-//                                    binding.ivDish8.isVisible=true
-//                                    binding.tvCorrect.isVisible=true
-//                                    binding.tvCorrect.setText("틀렸습니다.")
-//                                }
-//                            }
+//                        if(answer.equals(drag)==true) {
+////                            binding.tvCorrect.isVisible=true
+////                            binding.tvCorrect.setText("맞았습니다.")
+//                            score++
+//                            binding.tvScore.setText(score.toString())
+//                            binding.tvScore.isVisible=true
 //                        }
+//                        else {
+////                            binding.tvCorrect.isVisible=true
+////                            binding.tvCorrect.setText("틀렸습니다.")
+//                            binding.tvScore.setText(score.toString())
+//                            binding.tvScore.isVisible=true
+//                        }
+
+                        when(i){
+                            0 -> {
+                                if(answer.equals(drag)==true){
+                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish1);
+                                    binding.llDish1.isVisible=true
+                                    score++
+                                    binding.tvScore.setText(score.toString())
+                                    binding.tvScore.isVisible=true
+                                }
+                                else {
+                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish1);
+                                    binding.ivDish1.isVisible=true
+                                    binding.tvScore.setText(score.toString())
+                                    binding.tvScore.isVisible=true
+                                }
+                            }
+                            1 -> {
+                                if(answer.equals(drag)==true){
+                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish2);
+                                    binding.ivDish2.isVisible=true
+                                    score++
+                                    binding.tvScore.setText(score.toString())
+                                    binding.tvScore.isVisible=true
+                                }else {
+                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish2);
+                                    binding.ivDish2.isVisible=true
+                                    binding.tvScore.setText(score.toString())
+                                    binding.tvScore.isVisible=true
+                                }
+                            }
+                            2 -> {
+                                if(answer.equals(drag)==true){
+                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish3);
+                                    binding.ivDish3.isVisible=true
+                                    score++
+                                    binding.tvScore.setText(score.toString())
+                                    binding.tvScore.isVisible=true
+                                }else {
+                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish3);
+                                    binding.ivDish3.isVisible=true
+                                    binding.tvScore.setText(score.toString())
+                                    binding.tvScore.isVisible=true
+                                }
+                            }
+                            3 -> {
+                                if(answer.equals(drag)==true){
+                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish4);
+                                    binding.ivDish4.isVisible=true
+                                    score++
+                                    binding.tvScore.setText(score.toString())
+                                    binding.tvScore.isVisible=true
+                                }else {
+                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish4);
+                                    binding.ivDish4.isVisible=true
+                                    binding.tvScore.setText(score.toString())
+                                    binding.tvScore.isVisible=true
+                                }
+                            }
+                            4 -> {
+                                if(answer.equals(drag)==true){
+                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish5);
+                                    binding.ivDish5.isVisible=true
+                                    score++
+                                    binding.tvScore.setText(score.toString())
+                                    binding.tvScore.isVisible=true
+                                }else {
+                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish5);
+                                    binding.ivDish5.isVisible=true
+                                    binding.tvScore.setText(score.toString())
+                                    binding.tvScore.isVisible=true
+                                }
+                            }
+                            5 -> {
+                                if(answer.equals(drag)==true){
+                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish6);
+                                    binding.ivDish6.isVisible=true
+                                    score++
+                                    binding.tvScore.setText(score.toString())
+                                    binding.tvScore.isVisible=true
+                                }else {
+                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish6);
+                                    binding.ivDish6.isVisible=true
+                                    binding.tvScore.setText(score.toString())
+                                    binding.tvScore.isVisible=true
+                                }
+                            }
+                            6 -> {
+                                if(answer.equals(drag)==true){
+                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish7);
+                                    binding.ivDish7.isVisible=true
+                                    score++
+                                    binding.tvScore.setText(score.toString())
+                                    binding.tvScore.isVisible=true
+                                }else {
+                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish7);
+                                    binding.ivDish7.isVisible=true
+                                    binding.tvScore.setText(score.toString())
+                                    binding.tvScore.isVisible=true
+                                }
+                            }
+                            else -> {
+                                if(answer.equals(drag)==true){
+                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish8);
+                                    binding.ivDish8.isVisible=true
+                                    score++
+                                    binding.tvScore.setText(score.toString())
+                                    binding.tvScore.isVisible=true
+                                }else {
+                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish8);
+                                    binding.ivDish8.isVisible=true
+                                    binding.tvScore.setText(score.toString())
+                                    binding.tvScore.isVisible=true
+                                }
+                            }
+                        }
                     }
             }
         }.start()
 
 
+        Log.d("점수",score.toString())
         // 점수 저장
         SharedPreferencesController.setScore(this, score.toString())
     }
