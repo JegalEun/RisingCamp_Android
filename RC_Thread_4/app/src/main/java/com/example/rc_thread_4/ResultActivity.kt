@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.example.rc3rd.SharedPreferencesController
 import com.example.rc_thread_4.databinding.ActivityFinishBinding
 
@@ -23,22 +25,36 @@ class ResultActivity : AppCompatActivity() {
 
         // 점수 가져오기
         var score = intent.getSerializableExtra("score") as Int
+        var all = intent.getSerializableExtra("all") as Boolean
+
+        Log.d("score", score.toString())
+        Log.d("all", all.toString())
 
         val list = ArrayList<Int>()
         list.add(R.drawable.finish_one)
         list.add(R.drawable.finish_two)
 
-        Thread() {
+        if(!all){
+            // 다맞지 않았다
+            Thread() {
 
-            while (true) {
-                for (i in list) {
-                    Thread.sleep(300)
-                    handler.post {
-                        binding.ivFinish.setImageResource(i)
+                while (true) {
+                    for (i in list) {
+                        Thread.sleep(300)
+                        handler.post {
+                            binding.ivFinish.setImageResource(i)
+                        }
                     }
                 }
-            }
-        }.start()
+            }.start()
+        }
+
+        else {
+            // 다 맞았다면
+            binding.ivFinish.setImageResource(R.drawable.why)
+            binding.tvScore.isVisible=false
+            Toast.makeText(this, "10점이 적립되었습니다", Toast.LENGTH_SHORT).show()
+        }
 
         // 저장된 점수가 있다면 가져오기
         if(SharedPreferencesController.getScore(this).toString().equals(0)){
@@ -53,6 +69,7 @@ class ResultActivity : AppCompatActivity() {
         }else {
             // 저장된 점수가 없다면
             binding.tvScore.setText("점수 : "+score)
+            SharedPreferencesController.setScore(this, score.toString())
         }
 
         binding.ivReplay.setOnClickListener {

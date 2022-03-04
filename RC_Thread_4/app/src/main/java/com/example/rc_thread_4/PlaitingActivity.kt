@@ -8,6 +8,7 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.BoringLayout
 import android.util.Log
 import android.view.DragEvent
 import android.view.View
@@ -24,13 +25,15 @@ import com.example.rc_thread_4.databinding.ActivityPlaitingBinding
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
+import kotlin.properties.Delegates
 
 
 private lateinit var binding : ActivityPlaitingBinding
 private lateinit var drag_list : HashMap<String, ViewGroup>
 private lateinit var image_list : IntArray
-private var dish_count =0
-var score = 0
+private var dish_count : Int = 0
+var score : Int = 0
+var all by Delegates.notNull<Boolean>()
 
 class PlaitingActivity : AppCompatActivity() {
 
@@ -46,7 +49,6 @@ class PlaitingActivity : AppCompatActivity() {
     private val IMAGEVIEW_TAG_7 = "food2"
     private val IMAGEVIEW_TAG_9 = "떡볶이"
 
-
     private lateinit var list : ArrayList<Int>
     private lateinit var array_img : IntArray
 
@@ -61,6 +63,9 @@ class PlaitingActivity : AppCompatActivity() {
         TimerTask()
         drag_list = HashMap<String, ViewGroup>()
         image_list = IntArray(9)
+        dish_count=0
+        score=0
+        all = false
 
         list = intent.getSerializableExtra("list") as ArrayList<Int>
         array_img = intent.getSerializableExtra("array_img") as IntArray
@@ -97,20 +102,25 @@ class PlaitingActivity : AppCompatActivity() {
 
         // next 눌렀을 때 8가지 음식 모두 선택하지 않으면 다음으로 넘어가지 않음
         binding.ivNext.setOnClickListener {
-            if(dish_count<8){
-                TextTimer()
+            if(!isFinish){
+                if(dish_count<8){
+                    TextTimer()
+                }else {
+                    //채점으로 넘어가기
+                    timer.cancel()
+                    binding.tvTimer.isVisible=false
+                    correct(handler)
+                    isFinish=true
+                }
             }else {
-                //채점으로 넘어가기
-                timer.cancel()
-                binding.tvTimer.isVisible=false
-                correct(handler)
-                isFinish=true
+                // 결과 확인하기
+                result()
+                isFinish=false
             }
+
         }
 
-        if(isFinish){
-            result()
-        }
+
 
 
     }
@@ -134,13 +144,10 @@ class PlaitingActivity : AppCompatActivity() {
     private fun TextTimer() {
         timerTask = object : TimerTask() {
             var count = 3
+
             override fun run() {
                 binding.tvAlert.post(Runnable {
-                    if (count > 0) {
-                        binding.tvAlert.isVisible=true
-                    } else {
-                        binding.tvAlert.isVisible=false
-                    }
+                    binding.tvAlert.isVisible = count > 0
                     count--
                 })
             }
@@ -539,8 +546,6 @@ class PlaitingActivity : AppCompatActivity() {
     // 채점하는 함수
     fun correct(handler: Handler){
 
-        var isFinish = false
-
         Thread() {
 
                 for (i in 0..7) {
@@ -569,14 +574,16 @@ class PlaitingActivity : AppCompatActivity() {
                         when(i){
                             0 -> {
                                 if(answer.equals(drag)==true){
-                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish1);
+//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish1);
                                     binding.llDish1.isVisible=true
+                                    binding.ivDish1.setImageResource(R.drawable.oooookay)
                                     score++
                                     binding.tvScore.setText(score.toString())
                                     binding.tvScore.isVisible=true
                                 }
                                 else {
-                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish1);
+//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish1);
+                                    binding.ivDish1.setImageResource(R.drawable.uuuuunokay)
                                     binding.ivDish1.isVisible=true
                                     binding.tvScore.setText(score.toString())
                                     binding.tvScore.isVisible=true
@@ -584,13 +591,15 @@ class PlaitingActivity : AppCompatActivity() {
                             }
                             1 -> {
                                 if(answer.equals(drag)==true){
-                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish2);
+//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish2);
+                                    binding.ivDish2.setImageResource(R.drawable.oooookay)
                                     binding.ivDish2.isVisible=true
                                     score++
                                     binding.tvScore.setText(score.toString())
                                     binding.tvScore.isVisible=true
                                 }else {
-                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish2);
+//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish2);
+                                    binding.ivDish2.setImageResource(R.drawable.uuuuunokay)
                                     binding.ivDish2.isVisible=true
                                     binding.tvScore.setText(score.toString())
                                     binding.tvScore.isVisible=true
@@ -598,13 +607,15 @@ class PlaitingActivity : AppCompatActivity() {
                             }
                             2 -> {
                                 if(answer.equals(drag)==true){
-                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish3);
+//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish3);
+                                    binding.ivDish3.setImageResource(R.drawable.oooookay)
                                     binding.ivDish3.isVisible=true
                                     score++
                                     binding.tvScore.setText(score.toString())
                                     binding.tvScore.isVisible=true
                                 }else {
-                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish3);
+//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish3);
+                                    binding.ivDish3.setImageResource(R.drawable.uuuuunokay)
                                     binding.ivDish3.isVisible=true
                                     binding.tvScore.setText(score.toString())
                                     binding.tvScore.isVisible=true
@@ -612,13 +623,15 @@ class PlaitingActivity : AppCompatActivity() {
                             }
                             3 -> {
                                 if(answer.equals(drag)==true){
-                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish4);
+//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish4);
+                                    binding.ivDish4.setImageResource(R.drawable.oooookay)
                                     binding.ivDish4.isVisible=true
                                     score++
                                     binding.tvScore.setText(score.toString())
                                     binding.tvScore.isVisible=true
                                 }else {
-                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish4);
+//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish4);
+                                    binding.ivDish4.setImageResource(R.drawable.uuuuunokay)
                                     binding.ivDish4.isVisible=true
                                     binding.tvScore.setText(score.toString())
                                     binding.tvScore.isVisible=true
@@ -626,13 +639,15 @@ class PlaitingActivity : AppCompatActivity() {
                             }
                             4 -> {
                                 if(answer.equals(drag)==true){
-                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish5);
+//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish5);
+                                    binding.ivDish5.setImageResource(R.drawable.oooookay)
                                     binding.ivDish5.isVisible=true
                                     score++
                                     binding.tvScore.setText(score.toString())
                                     binding.tvScore.isVisible=true
                                 }else {
-                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish5);
+//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish5);
+                                    binding.ivDish5.setImageResource(R.drawable.uuuuunokay)
                                     binding.ivDish5.isVisible=true
                                     binding.tvScore.setText(score.toString())
                                     binding.tvScore.isVisible=true
@@ -640,13 +655,15 @@ class PlaitingActivity : AppCompatActivity() {
                             }
                             5 -> {
                                 if(answer.equals(drag)==true){
-                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish6);
+//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish6);
+                                    binding.ivDish6.setImageResource(R.drawable.oooookay)
                                     binding.ivDish6.isVisible=true
                                     score++
                                     binding.tvScore.setText(score.toString())
                                     binding.tvScore.isVisible=true
                                 }else {
-                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish6);
+//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish6);
+                                    binding.ivDish6.setImageResource(R.drawable.uuuuunokay)
                                     binding.ivDish6.isVisible=true
                                     binding.tvScore.setText(score.toString())
                                     binding.tvScore.isVisible=true
@@ -654,13 +671,15 @@ class PlaitingActivity : AppCompatActivity() {
                             }
                             6 -> {
                                 if(answer.equals(drag)==true){
-                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish7);
+//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish7);
+                                    binding.ivDish7.setImageResource(R.drawable.oooookay)
                                     binding.ivDish7.isVisible=true
                                     score++
                                     binding.tvScore.setText(score.toString())
                                     binding.tvScore.isVisible=true
                                 }else {
-                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish7);
+//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish7);
+                                    binding.ivDish7.setImageResource(R.drawable.uuuuunokay)
                                     binding.ivDish7.isVisible=true
                                     binding.tvScore.setText(score.toString())
                                     binding.tvScore.isVisible=true
@@ -668,13 +687,15 @@ class PlaitingActivity : AppCompatActivity() {
                             }
                             else -> {
                                 if(answer.equals(drag)==true){
-                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish8);
+//                                    Glide.with(this).load(R.drawable.okay).into(binding.ivDish8);
+                                    binding.ivDish8.setImageResource(R.drawable.oooookay)
                                     binding.ivDish8.isVisible=true
                                     score++
                                     binding.tvScore.setText(score.toString())
                                     binding.tvScore.isVisible=true
                                 }else {
-                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish8);
+//                                    Glide.with(this).load(R.drawable.unokay).into(binding.ivDish8);
+                                    binding.ivDish8.setImageResource(R.drawable.uuuuunokay)
                                     binding.ivDish8.isVisible=true
                                     binding.tvScore.setText(score.toString())
                                     binding.tvScore.isVisible=true
@@ -684,17 +705,18 @@ class PlaitingActivity : AppCompatActivity() {
                     }
             }
         }.start()
-
-
-        Log.d("점수",score.toString())
         // 점수 저장
-        SharedPreferencesController.setScore(this, score.toString())
+//        SharedPreferencesController.setScore(this, number.toString())
     }
 
     // 채점 다 끝나고 다음으로 넘어가는 함수
     fun result(){
+        if(score==8){
+            all=true
+        }
         val intent = Intent(this, ResultActivity::class.java)
         intent.putExtra("score", score)
+        intent.putExtra("all", all)
         startActivity(intent)
         finish()
     }
