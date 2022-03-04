@@ -52,25 +52,11 @@ class ResultActivity : AppCompatActivity() {
         else {
             // 다 맞았다면
             binding.ivFinish.setImageResource(R.drawable.why)
-            binding.tvScore.isVisible=false
-            Toast.makeText(this, "10점이 적립되었습니다", Toast.LENGTH_SHORT).show()
+            binding.tvScore.isVisible=true
         }
 
-        // 저장된 점수가 있다면 가져오기
-        if(SharedPreferencesController.getScore(this).toString().equals(0)){
-            val score_ing: String? = SharedPreferencesController.getScore(this)
-            val score_int = score_ing?.toInt()
-            if (score_ing != null) {
-                if (score_int != null) {
-                    score = score_int+score
-                }
-            }
-            binding.tvScore.setText("점수 : "+score)
-        }else {
-            // 저장된 점수가 없다면
-            binding.tvScore.setText("점수 : "+score)
-            SharedPreferencesController.setScore(this, score.toString())
-        }
+        // sharedPreference에서 점수 가져오기
+        getScore()
 
         binding.ivReplay.setOnClickListener {
             val intent = Intent(this, PlayActivity::class.java)
@@ -84,6 +70,25 @@ class ResultActivity : AppCompatActivity() {
 
         // 점수 SharedPreferences에 저장
         SharedPreferencesController.setScore(this, score.toString())
+    }
+
+    fun getScore(){
+        // 저장된 점수가 있다면 가져오기
+        if(SharedPreferencesController.getScore(this).isNullOrEmpty()==false){
+            val score_ing: String? = SharedPreferencesController.getScore(this)
+            val score_int = score_ing?.toInt()
+            if (score_ing != null) {
+                if (score_int != null) {
+                    score = score_int+score
+                    SharedPreferencesController.setScore(this, score.toString())
+                }
+            }
+            binding.tvScore.setText("누적 점수 : "+score)
+        }else {
+            // 저장된 점수가 없다면
+            binding.tvScore.setText("누적 점수 : "+score)
+            SharedPreferencesController.setScore(this, score.toString())
+        }
     }
 
 }
