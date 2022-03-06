@@ -1,0 +1,2 @@
+rootProject.name = "RC_5th_API"
+include ':app'
