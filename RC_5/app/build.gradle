@@ -7,6 +7,10 @@ android {
     compileSdkVersion 31
     buildToolsVersion "30.0.3"
 
+    viewBinding {
+        enabled = true
+    }
+
     defaultConfig {
         applicationId "com.example.rc_5th_api"
         minSdkVersion 24
