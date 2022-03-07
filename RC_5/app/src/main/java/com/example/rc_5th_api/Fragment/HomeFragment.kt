@@ -1,5 +1,6 @@
 package com.example.rc_5th_api.Fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.rc_5th_api.Adapter.ViewPagerAdapter
 import com.example.rc_5th_api.R
+import com.example.rc_5th_api.SetAddressActivity
 import com.example.rc_5th_api.databinding.FragmentHomeBinding
 
 data class AdArrayList(val position: String, val img: Int)
@@ -28,6 +30,7 @@ class HomeFragment : Fragment() {
     ): View? {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        // 뷰페이저 바꾸기
         handler = Handler(Looper.getMainLooper()) {
             setPage()
             true
@@ -45,6 +48,13 @@ class HomeFragment : Fragment() {
         // 뷰페이저 넘기는 쓰레드
         val thread = Thread(PagerRunnable())
         thread.start()
+
+        binding.tvDeliveryAddress.setOnClickListener {
+            activity?.let {
+                var intent = Intent(context, SetAddressActivity::class.java)
+                startActivity(intent)
+            }
+        }
 
         return binding.root
 
