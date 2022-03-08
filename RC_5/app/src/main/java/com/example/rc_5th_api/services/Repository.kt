@@ -1,6 +1,7 @@
 package com.example.rc_5th_api.services
 
 import com.example.rc_5th_api.BuildConfig
+import com.example.rc_5th_api.services.airQuality.MeasuredValue
 import com.example.rc_5th_api.services.monitoringstation.MonitoringStation
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -33,6 +34,15 @@ object Repository {
             ?.minByOrNull { it.tm ?:Double.MAX_VALUE }
     }
 
+
+    suspend fun getLatestAirQualityData(stationName : String) : MeasuredValue?=
+        airKoreaApiService
+            .getRealTimeAirQualties(stationName)
+            .body()
+            ?.response
+            ?.body
+            ?.measuredValues
+            ?.firstOrNull()
 
     private val kakaoLocalAPI : KakaoLocalAPI by lazy {
         Retrofit.Builder()

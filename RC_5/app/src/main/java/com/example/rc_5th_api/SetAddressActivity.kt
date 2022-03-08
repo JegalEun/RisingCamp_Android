@@ -8,6 +8,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.rc_5th_api.databinding.ActivitySetAddressBinding
 import com.example.rc_5th_api.services.Repository
+import com.example.rc_5th_api.services.airQuality.Grade
+import com.example.rc_5th_api.services.airQuality.MeasuredValue
+import com.example.rc_5th_api.services.monitoringstation.MonitoringStation
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
 import com.google.android.gms.location.LocationServices
@@ -190,10 +193,27 @@ class SetAddressActivity : AppCompatActivity(), OnMapReadyCallback {
                 val monitoringStation = Repository.getNearByMonitoringStation(location.latitude, location.longitude)
 
                 binding.tvAddressDetail.text = monitoringStation?.stationName
+                val measuredValue =
+                    Repository.getLatestAirQualityData(monitoringStation!!.stationName!!)
+//
+                displayAirQualityData(monitoringStation, measuredValue!!)
+//                binding.tvAirQuality.text=measuredValue.toString()
             }
         }
 
     }
+
+    fun displayAirQualityData(monitoringStation: MonitoringStation, measuredValue: MeasuredValue){
+        binding.tvAddressDetail.text = monitoringStation.addr
+
+        (measuredValue.khaiGrade?:Grade.UNKNOWN).let { grade ->
+            binding.tvAirQuality.setText("미세먼지 "+grade.label + grade.emoji)     // 미측정
+        }
+
+
+
+    }
+
     companion object {
         private const val REQUEST_ACCESS_LOCATION_PERMISSIONS = 100
 

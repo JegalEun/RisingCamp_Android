@@ -11,6 +11,11 @@
     <color name="gray">#707070</color>
     <color name="dark_gray">#1A1B21</color>
     <color name="yogiyo_color">#F80042</color>
+    <color name="blue">#1565C0</color>
+    <color name="green">#2E7D32</color>
+    <color name="yellow">#F9A825</color>
+    <color name="red">#C62828</color>
+    <color name="graygray">#424242</color>
 
 
 </resources>
