@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.rc_5th_api.Adapter.ViewPagerAdapter
+import com.example.rc_5th_api.LoginActivity
 import com.example.rc_5th_api.R
 import com.example.rc_5th_api.SetAddressActivity
 import com.example.rc_5th_api.databinding.FragmentHomeBinding
@@ -25,6 +26,12 @@ class MypageFragment : Fragment() {
     ): View? {
 
         binding = FragmentMypageBinding.inflate(inflater, container, false)
+        binding.btnLogin.setOnClickListener {
+            activity?.let {
+                var intent = Intent(context, LoginActivity::class.java)
+                startActivity(intent)
+            }
+        }
 
         return binding.root
 

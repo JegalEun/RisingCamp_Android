@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RC_5th_API</string>
+    <string name="kakao_app_key">cb9943de8f9e1db1922bc54569ade976</string>
 </resources>
