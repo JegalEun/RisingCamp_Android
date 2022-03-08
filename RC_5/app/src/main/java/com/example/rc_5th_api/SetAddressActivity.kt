@@ -7,6 +7,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.rc_5th_api.databinding.ActivitySetAddressBinding
+import com.example.rc_5th_api.services.Repository
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY
 import com.google.android.gms.location.LocationServices
@@ -15,6 +16,9 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.CancellationTokenSource
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 
 class SetAddressActivity : AppCompatActivity(), OnMapReadyCallback {
 //class SetAddressActivity : AppCompatActivity() {
@@ -30,6 +34,8 @@ class SetAddressActivity : AppCompatActivity(), OnMapReadyCallback {
     val DEFAULT_ZOOM_LEVEL = 17f
     val CITY_HALL = LatLng(37.5662952, 126.97794509999994)
     var googleMap : GoogleMap? = null
+    private val scope = MainScope()
+
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var cancellationTokenSource : CancellationTokenSource? = null
 
@@ -75,6 +81,7 @@ class SetAddressActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onDestroy() {
         super.onDestroy()
         cancellationTokenSource?.cancel()
+        scope.cancel()
     }
 
 
@@ -148,15 +155,7 @@ class SetAddressActivity : AppCompatActivity(), OnMapReadyCallback {
         if(!locationPermissionGranted){
             finish()
         }else {
-            cancellationTokenSource = CancellationTokenSource()
-
-            fusedLocationProviderClient.
-            getCurrentLocation(
-                com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY,
-                cancellationTokenSource!!.token
-            ).addOnSuccessListener { location ->
-                binding.tvAddressDetail.text = "${location.latitude}, ${location.longitude}"
-            }
+            fetchAirQualityData()
         }
 //        initMap()
     }
@@ -177,6 +176,24 @@ class SetAddressActivity : AppCompatActivity(), OnMapReadyCallback {
         )
     }
 
+    @SuppressLint("MissingPermission")
+    private fun fetchAirQualityData(){
+        cancellationTokenSource = CancellationTokenSource()
+
+        fusedLocationProviderClient.
+        getCurrentLocation(
+            com.google.android.gms.location.LocationRequest.PRIORITY_HIGH_ACCURACY,
+            cancellationTokenSource!!.token
+        ).addOnSuccessListener { location ->
+            binding.tvAddressDetail.text = "${location.latitude}, ${location.longitude}"
+            scope.launch {
+                val monitoringStation = Repository.getNearByMonitoringStation(location.latitude, location.longitude)
+
+                binding.tvAddressDetail.text = monitoringStation?.stationName
+            }
+        }
+
+    }
     companion object {
         private const val REQUEST_ACCESS_LOCATION_PERMISSIONS = 100
 
