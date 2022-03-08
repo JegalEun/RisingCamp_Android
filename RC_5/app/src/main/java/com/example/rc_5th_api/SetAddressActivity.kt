@@ -13,9 +13,11 @@ import androidx.core.app.ActivityCompat
 import com.example.rc_5th_api.databinding.ActivitySetAddressBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 
-class SetAddressActivity : AppCompatActivity() {
+class SetAddressActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var binding : ActivitySetAddressBinding
 
@@ -36,7 +38,9 @@ class SetAddressActivity : AppCompatActivity() {
         val view = binding.root
         setContentView(view)
 
-        binding.mapView.onCreate(savedInstanceState)
+        setupGoogleMap()
+
+//        binding.mapView.onCreate(savedInstanceState)
 
         binding.flSetGps.setOnClickListener {
             Log.d("눌림","눌림")
@@ -44,7 +48,7 @@ class SetAddressActivity : AppCompatActivity() {
         }
 
         if(checkPermissions()) {
-            initMap()
+//            initMap()
         } else {
             ActivityCompat.requestPermissions(this, PERMISSIONS, REQUEST_PERMISSION_CODE)
         }
@@ -64,30 +68,30 @@ class SetAddressActivity : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        initMap()
+//        initMap()
     }
 
-    @SuppressLint("MissingPermission")
-    fun initMap() {
-        // 구글맵을 불러오는 함수
-        binding.mapView.getMapAsync {
-            googleMap = it
-            // 현재화 위치이동 버튼 비활성
-            it.uiSettings.isMyLocationButtonEnabled = false
-
-            when {
-                checkPermissions() -> {
-                    // 권한이 있을 경우 현재 위치 이동 활성화하고 카메라 이동
-                    it.isMyLocationEnabled = true
-                    it.moveCamera((CameraUpdateFactory.newLatLngZoom(getMyLocation(), DEFAULT_ZOOM_LEVEL)))
-                }
-                else -> {
-                    // 권한이 없다면 지정해둔 서울시청의 위치로 이동
-                    it.moveCamera(CameraUpdateFactory.newLatLngZoom(CITY_HALL, DEFAULT_ZOOM_LEVEL))
-                }
-            }
-        }
-    }
+//    @SuppressLint("MissingPermission")
+//    fun initMap() {
+//        // 구글맵을 불러오는 함수
+//        binding.mapView.getMapAsync {
+//            googleMap = it
+//            // 현재화 위치이동 버튼 비활성
+//            it.uiSettings.isMyLocationButtonEnabled = false
+//
+//            when {
+//                checkPermissions() -> {
+//                    // 권한이 있을 경우 현재 위치 이동 활성화하고 카메라 이동
+//                    it.isMyLocationEnabled = true
+//                    it.moveCamera((CameraUpdateFactory.newLatLngZoom(getMyLocation(), DEFAULT_ZOOM_LEVEL)))
+//                }
+//                else -> {
+//                    // 권한이 없다면 지정해둔 서울시청의 위치로 이동
+//                    it.moveCamera(CameraUpdateFactory.newLatLngZoom(CITY_HALL, DEFAULT_ZOOM_LEVEL))
+//                }
+//            }
+//        }
+//    }
 
     @SuppressLint("MissingPermission")
     fun getMyLocation() : LatLng {
@@ -115,5 +119,14 @@ class SetAddressActivity : AppCompatActivity() {
             )
             else -> Toast.makeText(this, "위치사용권한 설정에 동의해주세요", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun setupGoogleMap() {
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.frgment_map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+    }
+
+    override fun onMapReady(p0: GoogleMap?) {
+
     }
 }

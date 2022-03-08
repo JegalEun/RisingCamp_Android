@@ -35,14 +35,23 @@
             android:textColor="@color/white"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
+<!--    <com.google.android.gms.maps.MapView-->
+<!--        android:id="@+id/mapView"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/cl_toolbar"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/ll_address_detail"/>-->
+    <fragment
+        android:id="@+id/frgment_map"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_toolbar"
-        app:layout_constraintBottom_toTopOf="@+id/ll_address_detail"/>
+        app:layout_constraintBottom_toTopOf="@id/ll_address_detail"
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
     <FrameLayout
         android:id="@+id/fl_set_gps"
         android:layout_width="50dp"
@@ -66,7 +75,7 @@
         android:layout_marginHorizontal="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mapView"
+        app:layout_constraintTop_toBottomOf="@id/frgment_map"
         app:layout_constraintBottom_toBottomOf="parent"
         android:orientation="vertical">
         <TextView
