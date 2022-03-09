@@ -3,11 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.rc_5th_api">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <!--    네트워크로만 위치 측정-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <!--    GPS 센서로 측정-->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".GlobalApplication"
@@ -42,7 +43,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".SetAddressActivity"/>
-<!--        <activity android:name=".MainActivity"/>-->
+        <!--        <activity android:name=".MainActivity"/>-->
         <activity android:name=".LoginActivity"/>
 
     </application>

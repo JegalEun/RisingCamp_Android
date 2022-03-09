@@ -25,15 +25,22 @@
             android:layout_height="wrap_content"
             android:text="로그인하고 다양한 혜택을 받아보세요!"
             android:textColor="@color/gray"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_login_kakao"
-            android:layout_width="match_parent"
+<!--        <androidx.appcompat.widget.AppCompatButton-->
+<!--            android:id="@+id/btn_login_kakao"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="40dp"-->
+<!--            android:text="카카오로 로그인"-->
+<!--            android:textStyle="bold"-->
+<!--            android:textColor="@color/black"-->
+<!--            android:background="@drawable/kakao_login"/>-->
+        <ImageButton
+            android:id="@+id/ib_kakao_login"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="카카오로 로그인"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:background="@drawable/kakao_login"/>
+            android:src="@drawable/kakao"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="20dp"/>
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

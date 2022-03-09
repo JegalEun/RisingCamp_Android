@@ -76,7 +76,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
         // 로그인 버튼
-        binding.btnLoginKakao.setOnClickListener {
+        binding.ibKakaoLogin.setOnClickListener {
             if(LoginClient.instance.isKakaoTalkLoginAvailable(this)){
                 LoginClient.instance.loginWithKakaoTalk(this, callback = callback)
             }else{
