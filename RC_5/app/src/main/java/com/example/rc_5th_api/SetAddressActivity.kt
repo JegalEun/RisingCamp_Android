@@ -147,17 +147,19 @@ class SetAddressActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
+    // 권한을 요청하고 돌아오는 함수
     @SuppressLint("MissingPermission")
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        val locationPermissionGranted =
-            requestCode == REQUEST_ACCESS_LOCATION_PERMISSIONS &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED
+        val locationPermissionGranted = requestCode == REQUEST_ACCESS_LOCATION_PERMISSIONS &&
+                grantResults[0] == PackageManager.PERMISSION_GRANTED
 
         if(!locationPermissionGranted){
+            // 권한 요청이 거부
             finish()
         }else {
+            // 권한 요청을 허락했을 경우 대기정보 가져오기
             fetchAirQualityData()
         }
 //        initMap()
@@ -168,6 +170,7 @@ class SetAddressActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
 
+    // 권한 요청
     private fun requestLocationPermissions(){
         ActivityCompat.requestPermissions(
             this,

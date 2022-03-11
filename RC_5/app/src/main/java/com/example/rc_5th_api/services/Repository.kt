@@ -15,9 +15,9 @@ import retrofit2.http.Query
 
 object Repository {
 
+    // 경도, 위도를 이용해 근처에 있는 측정소 가져오기
     suspend fun getNearByMonitoringStation(latitude : Double, longtitude: Double) : MonitoringStation? {
-        val tmCoordinates = kakaoLocalAPI
-            .getTmCoordinates(longtitude, latitude)
+        val tmCoordinates = kakaoLocalAPI.getTmCoordinates(longtitude, latitude)
             .body()
             ?.documents
             ?.firstOrNull()
@@ -44,6 +44,7 @@ object Repository {
             ?.measuredValues
             ?.firstOrNull()
 
+    // Retrofit client 생성하기
     private val kakaoLocalAPI : KakaoLocalAPI by lazy {
         Retrofit.Builder()
             .baseUrl(Url.KAKAO_API_BASE_URL)
