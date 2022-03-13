@@ -4,3 +4,4 @@
 - [안드로이드 3주차 과제 (ListView, RecyclerView)](https://github.com/JegalEun/RisingCamp_Android/tree/main/RC_4)
 - [안드로이드 4주차 과제 (Thread)](https://github.com/JegalEun/RisingCamp_Android/tree/main/RC_Thread_4)
 - [안드로이드 5주차 과제 (API, SDK)](https://github.com/JegalEun/RisingCamp_Android/tree/main/RC_5)
+- [안드로이드 6주차 과제 (MVP, JWT)](https://github.com/JegalEun/RisingCamp_Android/tree/main/RC_6)
