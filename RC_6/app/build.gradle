@@ -19,6 +19,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "KAKAO_API_KEY", project.properties["KAKAO_API_KEY"]
+        buildConfigField "String", "AIR_KOREA_API_KEY", project.properties["AIR_KOREA_API_KEY"]
     }
 
     buildTypes {
@@ -64,10 +66,8 @@ dependencies {
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
-    testImplementation 'junit:junit:4.13.1'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-
+    implementation 'com.google.code.gson:gson:2.8.8'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.1'
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
     implementation 'com.google.maps.android:android-maps-utils:0.5+'

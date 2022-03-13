@@ -3,10 +3,14 @@ package com.example.rc_6.config
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.Toast
+import androidx.annotation.NonNull
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewbinding.ViewBinding
+import com.example.rc_6.databinding.ActivitySetAddressBinding
 import com.example.rc_6.util.LoadingDialog
+import kotlin.reflect.KFunction1
 
 // 액티비티의 기본을 작성, 뷰 바인딩 활용
 abstract class BaseActivity<B : ViewBinding>(private val inflate: (LayoutInflater) -> B) :

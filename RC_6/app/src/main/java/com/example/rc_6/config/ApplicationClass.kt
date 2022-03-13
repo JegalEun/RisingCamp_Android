@@ -2,10 +2,16 @@ package com.example.rc_6.config
 
 import android.app.Application
 import android.content.SharedPreferences
+import com.example.rc_6.BuildConfig
+import com.example.rc_6.src.main.Url
+import com.example.rc_6.src.main.setAddress.models.AirKoreaApiInerface
+import com.example.rc_6.src.main.setAddress.models.KakaoLocalInterface
+import com.example.rc_6.src.main.setAddress.models.monitoringStation.MonitoringStation
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 class ApplicationClass : Application() {
@@ -40,6 +46,25 @@ class ApplicationClass : Application() {
         initRetrofitInstance()
     }
 
+    // 경도, 위도를 이용해 근처에 있는 측정소 가져오기
+    suspend fun getNearByMonitoringStation(latitude : Double, longtitude: Double) : MonitoringStation? {
+        val tmCoordinates = kakaoLocalAPI.getTmCoordinates(longtitude, latitude)
+            .body()
+            ?.documents
+            ?.firstOrNull()
+
+        val tmX = tmCoordinates?.x
+        val tmY = tmCoordinates?.y
+
+        return airKoreaApiService
+            .getNearbyMonitoringStation(tmX!!, tmY!!)
+            .body()
+            ?.response
+            ?.body
+            ?.monitoringStations
+            ?.minByOrNull { it.tm ?:Double.MAX_VALUE }
+    }
+
     // 레트로핏 인스턴스를 생성하고, 레트로핏에 각종 설정값들을 지정해줍니다.
     // 연결 타임아웃시간은 5초로 지정이 되어있고, HttpLoggingInterceptor를 붙여서 어떤 요청이 나가고 들어오는지를 보여줍니다.
     private fun initRetrofitInstance() {
@@ -59,4 +84,36 @@ class ApplicationClass : Application() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
+    // Retrofit client 생성하기
+    private val kakaoLocalAPI : KakaoLocalInterface by lazy {
+        Retrofit.Builder()
+            .baseUrl(Url.KAKAO_API_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(buildHttpClient())
+            .build()
+            .create()
+    }
+//
+    private val airKoreaApiService : AirKoreaApiInerface by lazy {
+        Retrofit.Builder()
+            .baseUrl(Url.AIR_KOREA_API_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(buildHttpClient())
+            .build()
+            .create()
+    }
+
+    private fun buildHttpClient() : OkHttpClient =
+        OkHttpClient.Builder()
+            .addInterceptor(
+                HttpLoggingInterceptor().apply {
+                    level = if(BuildConfig.DEBUG){
+                        HttpLoggingInterceptor.Level.BODY
+                    }else {
+                        HttpLoggingInterceptor.Level.NONE
+                    }
+                }
+            )
+            .build()
 }

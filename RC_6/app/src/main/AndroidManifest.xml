@@ -2,7 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.rc_6">
 
+    <!--    네트워크 통신-->
     <uses-permission android:name="android.permission.INTERNET" />
+    <!--    네트워크로만 위치 측정-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <!--    GPS 센서로 측정-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -12,13 +17,28 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
         android:theme="@style/Theme.RC_6">
-        <activity android:name=".src.main.MainActivity">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCI9IvPbDzQgzNGnG4IE4RsJIjtxcld2fU"/>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"/>
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false"/>
+
+        <activity android:name=".src.main.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
+                <data
+                    android:host="oauth" android:scheme="kakaocb9943de8f9e1db1922bc54569ade976"/>
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".src.main.Login.LoginActivity"/>
+        <activity android:name=".src.main.SetAddressActivity"/>
     </application>
 
 </manifest>
