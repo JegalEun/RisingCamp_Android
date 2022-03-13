@@ -13,7 +13,7 @@ import com.example.rc_5th_api.R
 import com.example.rc_5th_api.SetAddressActivity
 import com.example.rc_5th_api.databinding.FragmentHomeBinding
 
-data class AdArrayList(val position: String, val img: Int)
+data class AdArrayList(val position: String,val img: Int)
 
 class HomeFragment : Fragment() {
 
@@ -36,11 +36,11 @@ class HomeFragment : Fragment() {
             true
         }
 
-        adArrayList.add(AdArrayList("1 / 5 모두 보기", R.drawable.page1))
-        adArrayList.add(AdArrayList("2 / 5 모두 보기", R.drawable.page1))
-        adArrayList.add(AdArrayList("3 / 5 모두 보기", R.drawable.page1))
-        adArrayList.add(AdArrayList("4 / 5 모두 보기", R.drawable.page1))
-        adArrayList.add(AdArrayList("5 / 5 모두 보기", R.drawable.page1))
+        adArrayList.add(AdArrayList("1",R.drawable.page1))
+        adArrayList.add(AdArrayList("2",R.drawable.ad2))
+        adArrayList.add(AdArrayList("3",R.drawable.ad3))
+        adArrayList.add(AdArrayList("4",R.drawable.page1))
+        adArrayList.add(AdArrayList("5",R.drawable.ad2))
 
         ad_viewPager = ViewPagerAdapter(this.requireActivity(), adArrayList)
         binding.vpAd.adapter = ad_viewPager

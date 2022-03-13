@@ -51,6 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/cl_toolbar"
         app:layout_constraintBottom_toTopOf="@id/ll_address_detail"
+        android:layout_marginTop="15dp"
         android:name="com.google.android.gms.maps.SupportMapFragment"/>
     <FrameLayout
         android:id="@+id/fl_set_gps"

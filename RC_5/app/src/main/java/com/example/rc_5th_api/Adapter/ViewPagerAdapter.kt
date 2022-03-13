@@ -23,7 +23,7 @@ class ViewPagerAdapter(context: Context, private val adArrayList: ArrayList<AdAr
 
         binding = ViewPageOneBinding.inflate(inflater, container, false)
         binding.ivAdViewpager.setImageResource(adArrayList[position].img)
-        binding.tvAdViewpager.text = adArrayList[position].position
+        binding.tvAdViewpager.setText(adArrayList[position].position+" / "+adArrayList.size+" 모두 보기")
 //        val view= LayoutInflater.from(container.context).inflate(R.layout.view_page_one,container,false)
         container.addView(binding.root)
         return binding.root
