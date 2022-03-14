@@ -19,12 +19,42 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
     private lateinit var ad_viewPager: ViewPagerAdapter
     private lateinit var handler : Handler
     private var currentPosition=0
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+
+
+//        adArrayList.add(AdArrayList("1",R.drawable.page1))
+//        adArrayList.add(AdArrayList("2",R.drawable.ad2))
+//        adArrayList.add(AdArrayList("3",R.drawable.ad3))
+//        adArrayList.add(AdArrayList("4",R.drawable.page1))
+//        adArrayList.add(AdArrayList("5",R.drawable.ad2))
+
+//        ad_viewPager = ViewPagerAdapter(this.requireActivity(), adArrayList)
+//        binding.vpAd.adapter = ad_viewPager
+//
+//        // 뷰페이저 넘기는 쓰레드
+//        val thread = Thread(PagerRunnable())
+//        thread.start()
+//
+//        binding.tvDeliveryAddress.setOnClickListener {
+//            activity?.let {
+//                var intent = Intent(context, SetAddressActivity::class.java)
+//                startActivity(intent)
+//            }
+//        }
+
+//        return binding.root
+
+
+//    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         // 뷰페이저 바꾸기
         handler = Handler(Looper.getMainLooper()) {
@@ -51,11 +81,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::bind
                 startActivity(intent)
             }
         }
-
-        return binding.root
-
-
     }
+
     fun setPage() {
         if(currentPosition==5) {
             currentPosition=0

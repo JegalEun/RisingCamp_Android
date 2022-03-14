@@ -14,8 +14,8 @@ import retrofit2.Response
 class SetAddressService(val view : SetAddressActivityView) {
 
     fun tryGetTm(latitude : Double, longtitude: Double) {
-        val TmRetrofitInterface = ApplicationClass.sRetrofit.create(KakaoLocalInterface::class.java)
-        TmRetrofitInterface.getTmCoordinates(latitude, longtitude).enqueue(object : Callback<TmCoordinatesResponse> {
+        val tmRetrofitInterface = ApplicationClass.sRetrofit.create(KakaoLocalInterface::class.java)
+        tmRetrofitInterface.getTmCoordinates(latitude, longtitude).enqueue(object : Callback<TmCoordinatesResponse> {
             override fun onResponse(call: Call<TmCoordinatesResponse>, response: Response<TmCoordinatesResponse>) {
                 view.onGetTmSuccess(response.body() as TmCoordinatesResponse)
             }

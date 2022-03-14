@@ -43,77 +43,113 @@ class ApplicationClass : Application() {
                 Application.MODE_PRIVATE
             )
         // 레트로핏 인스턴스 생성
-        initRetrofitInstance()
+//        initRetrofitInstance()
+
+         sRetrofit = Retrofit.Builder()
+            .baseUrl(Url.KAKAO_API_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        sRetrofit = Retrofit.Builder()
+            .baseUrl(Url.AIR_KOREA_API_BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+//        kakaoRetrofitInstance()
+//        AirRetrofitInstance()
     }
 
     // 경도, 위도를 이용해 근처에 있는 측정소 가져오기
-    suspend fun getNearByMonitoringStation(latitude : Double, longtitude: Double) : MonitoringStation? {
-        val tmCoordinates = kakaoLocalAPI.getTmCoordinates(longtitude, latitude)
-            .body()
-            ?.documents
-            ?.firstOrNull()
-
-        val tmX = tmCoordinates?.x
-        val tmY = tmCoordinates?.y
-
-        return airKoreaApiService
-            .getNearbyMonitoringStation(tmX!!, tmY!!)
-            .body()
-            ?.response
-            ?.body
-            ?.monitoringStations
-            ?.minByOrNull { it.tm ?:Double.MAX_VALUE }
-    }
+//    suspend fun getNearByMonitoringStation(latitude : Double, longtitude: Double) : MonitoringStation? {
+//        val tmCoordinates = kakaoLocalAPI.getTmCoordinates(longtitude, latitude)
+//            .body()
+//            ?.documents
+//            ?.firstOrNull()
+//
+//        val tmX = tmCoordinates?.x
+//        val tmY = tmCoordinates?.y
+//
+//        return airKoreaApiService
+//            .getNearbyMonitoringStation(tmX!!, tmY!!)
+//            .body()
+//            ?.response
+//            ?.body
+//            ?.monitoringStations
+//            ?.minByOrNull { it.tm ?:Double.MAX_VALUE }
+//    }
 
     // 레트로핏 인스턴스를 생성하고, 레트로핏에 각종 설정값들을 지정해줍니다.
     // 연결 타임아웃시간은 5초로 지정이 되어있고, HttpLoggingInterceptor를 붙여서 어떤 요청이 나가고 들어오는지를 보여줍니다.
-    private fun initRetrofitInstance() {
-        val client: OkHttpClient = OkHttpClient.Builder()
-            .readTimeout(5000, TimeUnit.MILLISECONDS)
-            .connectTimeout(5000, TimeUnit.MILLISECONDS)
-            // 로그캣에 okhttp.OkHttpClient로 검색하면 http 통신 내용을 보여줍니다.
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-            .addNetworkInterceptor(XAccessTokenInterceptor()) // JWT 자동 헤더 전송
-            .build()
+//    private fun initRetrofitInstance() {
+//        val client: OkHttpClient = OkHttpClient.Builder()
+//            .readTimeout(5000, TimeUnit.MILLISECONDS)
+//            .connectTimeout(5000, TimeUnit.MILLISECONDS)
+//            // 로그캣에 okhttp.OkHttpClient로 검색하면 http 통신 내용을 보여줍니다.
+//            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+//            .addNetworkInterceptor(XAccessTokenInterceptor()) // JWT 자동 헤더 전송
+//            .build()
+//
+//        // sRetrofit 이라는 전역변수에 API url, 인터셉터, Gson을 넣어주고 빌드해주는 코드
+//        // 이 전역변수로 http 요청을 서버로 보내면 됩니다.
+//        sRetrofit = Retrofit.Builder()
+//            .baseUrl(API_URL)
+//            .client(client)
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//    }
 
+    private fun kakaoRetrofitInstance() {
+
+        val client: OkHttpClient = OkHttpClient.Builder()
+            .build()
         // sRetrofit 이라는 전역변수에 API url, 인터셉터, Gson을 넣어주고 빌드해주는 코드
         // 이 전역변수로 http 요청을 서버로 보내면 됩니다.
         sRetrofit = Retrofit.Builder()
-            .baseUrl(API_URL)
+            .baseUrl(Url.KAKAO_API_BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    private fun AirRetrofitInstance() {
+        val client: OkHttpClient = OkHttpClient.Builder()
+            .build()
+        sRetrofit = Retrofit.Builder()
+            .baseUrl(Url.AIR_KOREA_API_BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
     // Retrofit client 생성하기
-    private val kakaoLocalAPI : KakaoLocalInterface by lazy {
-        Retrofit.Builder()
-            .baseUrl(Url.KAKAO_API_BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(buildHttpClient())
-            .build()
-            .create()
-    }
+//    private val kakaoLocalAPI : KakaoLocalInterface by lazy {
+//        Retrofit.Builder()
+//            .baseUrl(Url.KAKAO_API_BASE_URL)
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .client(buildHttpClient())
+//            .build()
+//            .create()
+//    }
+////
+//    private val airKoreaApiService : AirKoreaApiInerface by lazy {
+//        Retrofit.Builder()
+//            .baseUrl(Url.AIR_KOREA_API_BASE_URL)
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .client(buildHttpClient())
+//            .build()
+//            .create()
+//    }
 //
-    private val airKoreaApiService : AirKoreaApiInerface by lazy {
-        Retrofit.Builder()
-            .baseUrl(Url.AIR_KOREA_API_BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(buildHttpClient())
-            .build()
-            .create()
-    }
-
-    private fun buildHttpClient() : OkHttpClient =
-        OkHttpClient.Builder()
-            .addInterceptor(
-                HttpLoggingInterceptor().apply {
-                    level = if(BuildConfig.DEBUG){
-                        HttpLoggingInterceptor.Level.BODY
-                    }else {
-                        HttpLoggingInterceptor.Level.NONE
-                    }
-                }
-            )
-            .build()
+//    private fun buildHttpClient() : OkHttpClient =
+//        OkHttpClient.Builder()
+//            .addInterceptor(
+//                HttpLoggingInterceptor().apply {
+//                    level = if(BuildConfig.DEBUG){
+//                        HttpLoggingInterceptor.Level.BODY
+//                    }else {
+//                        HttpLoggingInterceptor.Level.NONE
+//                    }
+//                }
+//            )
+//            .build()
 }

@@ -53,7 +53,7 @@ class SetAddressActivity : BaseActivity<ActivitySetAddressBinding>(ActivitySetAd
         // 시작하자마자 권한 요청
         requestLocationPermissions()
 
-//        setupGoogleMap()
+        setupGoogleMap()
 
 //        binding.mapView.onCreate(savedInstanceState)
 
@@ -69,7 +69,7 @@ class SetAddressActivity : BaseActivity<ActivitySetAddressBinding>(ActivitySetAd
 //        }
 
         // 구글 맵
-        setupGoogleMap()
+//        setupGoogleMap()
     }
 
 //    private fun checkPermissions() : Boolean {
@@ -233,28 +233,26 @@ class SetAddressActivity : BaseActivity<ActivitySetAddressBinding>(ActivitySetAd
             cancellationTokenSource!!.token
         ).addOnSuccessListener { location ->
             binding.tvAddressDetail.text = "${location.latitude}, ${location.longitude}"
-            scope.launch {
-//                val monitoringStation = Repository.getNearByMonitoringStation(location.latitude, location.longitude)
-//                //경도,위도 가져오기
-//                SetAddressService(this).tryGetTm(location.latitude, location.longitude)
-//                //근처 미세먼지 측정장소 가져오기
-//                SetAddressService(this).tryGetStation(tm_x, tm_y)
-//                //측정장소에서 미세먼지 결과 가져오기
-//                SetAddressService(this).tryGetAirQuality(near_station)
+            Log.d("latitude",location.latitude.toString())
+            Log.d("longitude",location.longitude.toString())
 
-//                binding.tvAddressDetail.text = monitoringStation?.stationName
-//                val measuredValue =
-//                    Repository.getLatestAirQualityData(monitoringStation!!.stationName!!)
-//
-//                displayAirQualityData(monitoringStation, measuredValue!!)
-//                binding.tvAirQuality.text=measuredValue.toString()
-            }
             //경도,위도 가져오기
             SetAddressService(this).tryGetTm(location.latitude, location.longitude)
+            Log.d("latitude",location.latitude.toString())
+            Log.d("longitude",location.longitude.toString())
             //근처 미세먼지 측정장소 가져오기
             SetAddressService(this).tryGetStation(tm_x, tm_y)
+            Log.d("tm_x", tm_x.toString())
+            Log.d("tm_y", tm_y.toString())
             //측정장소에서 미세먼지 결과 가져오기
             SetAddressService(this).tryGetAirQuality(near_station)
+            Log.d("near_station", near_station)
+
+            binding.tvAddressDetail.text = add
+
+            khaiGrade.let { khaiGrade ->
+                binding.tvAirQuality.setText("미세먼지"+ air_quality+khaiGrade)
+            }
         }
 
     }
