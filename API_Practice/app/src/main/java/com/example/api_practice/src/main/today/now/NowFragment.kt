@@ -2,6 +2,7 @@ package com.example.api_practice.src.main.today.now
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.api_practice.R
 import com.example.api_practice.config.BaseFragment
@@ -25,5 +26,14 @@ class NowFragment : BaseFragment<FragmentFragmentNowBinding>(FragmentFragmentNow
 
         recyclerViewAdapter = NowRecyclerViewAdapter(this.requireActivity(), dataList)
         binding.rvBookList.adapter = recyclerViewAdapter
+
+        isEmpty()
+    }
+    // 리사이클러뷰의 아이템이 0개일 때
+    fun isEmpty(){
+        if(recyclerViewAdapter.itemCount==0){
+            binding.rvBookList.visibility=View.GONE
+            binding.tvBookEmpty.visibility=View.VISIBLE
+        }
     }
 }
