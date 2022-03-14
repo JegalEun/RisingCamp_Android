@@ -12,4 +12,5 @@
     <string name="main_now_tab_title">독점 연재! 습관적 반성 이제 그만</string>
     <string name="main_now_tab_description">반성 중독자의 현생 존중 에세이</string>
     <string name="main_now_tab_recommend_for_you">당신을 위한 추천</string>
+    <string name="main_now_tab_recommend_for_you_book_title">어떤 책부터 읽어야 할지 모를 땐 최신 베스트셀러부터</string>
 </resources>

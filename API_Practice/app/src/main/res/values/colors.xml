@@ -13,5 +13,8 @@
     <color name="mili_color">#FBB200</color>
     <color name="guide_line">#DFDEDF</color>
     <color name="gray">#949494</color>
+    <color name="mint">#D3F1E7</color>
+    <color name="pink">#F6D0DC</color>
+    <color name="mint_white_pink">#F6F6F8</color>
 
 </resources>

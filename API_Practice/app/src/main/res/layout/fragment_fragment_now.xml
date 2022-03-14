@@ -1,47 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
     android:layout_marginVertical="@dimen/activity_vertical_margin">
 
-    <TextView
-        android:id="@+id/tv_tab_now_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textStyle="bold"
-        android:textSize="30sp"
-        android:textColor="@color/black"
-        android:text="독점 연재! \n습관적 반성 이제 그만"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_tab_now_title"
-        android:layout_marginTop="@dimen/activity_top_margin"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="@string/main_now_tab_description"
-        android:textSize="20sp"
-        android:textColor="@color/gray"/>
-    <TextView
-        android:layout_width="100dp"
-        android:layout_height="40dp"
-        android:gravity="center"
-        android:padding="@dimen/activity_padding_margin"
-        android:layout_marginBottom="@dimen/activity_more_bottom_margin"
-        android:text="1/12 >"
-        android:textSize="15sp"
-        android:background="@drawable/draw_black_round"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="400dp"
-        android:src="@drawable/book"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:adjustViewBounds="true"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/tv_tab_now_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:text="독점 연재! \n습관적 반성 이제 그만"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_tab_now_title"
+                android:layout_marginTop="@dimen/activity_top_margin"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/main_now_tab_description"
+                android:textSize="15sp"
+                android:textColor="@color/gray"/>
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:padding="@dimen/activity_padding_margin"
+                android:layout_marginBottom="@dimen/activity_more_bottom_margin"
+                android:text="1/12 >"
+                android:textSize="15sp"
+                android:background="@drawable/draw_black_round"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="300dp"
+                android:src="@drawable/book"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:adjustViewBounds="true"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/cl_main"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/activity_top_margin"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/main_now_tab_recommend_for_you"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black"/>
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"/>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/next"/>
+            </LinearLayout>
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_top_margin">
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_book_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/rv_home_tab_now_item"/>
+            </HorizontalScrollView>
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>
