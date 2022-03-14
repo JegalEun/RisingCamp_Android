@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginHorizontal="@dimen/activity_horizontal_margin"
+    android:layout_marginVertical="@dimen/activity_vertical_margin">
+
+    <TextView
+        android:id="@+id/tv_tab_now_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:text="독점 연재! \n습관적 반성 이제 그만"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/tv_tab_now_title"
+        android:layout_marginTop="@dimen/activity_top_margin"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/main_now_tab_description"
+        android:textSize="20sp"
+        android:textColor="@color/gray"/>
+    <TextView
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:padding="@dimen/activity_padding_margin"
+        android:layout_marginBottom="@dimen/activity_more_bottom_margin"
+        android:text="1/12 >"
+        android:textSize="15sp"
+        android:background="@drawable/draw_black_round"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:src="@drawable/book"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

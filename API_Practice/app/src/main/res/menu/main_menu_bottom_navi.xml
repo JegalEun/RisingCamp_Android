@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_main_btm_nav_today"
+        android:icon="@drawable/today"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:checkable="true"
+        android:title="@string/main_btm_nav_today_title" />
+
+    <item
+        android:id="@+id/menu_main_btm_nav_number"
+        android:icon="@drawable/number"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:title="@string/main_btm_nav_number_title" />
+
+    <item
+        android:id="@+id/menu_main_btm_nav_search"
+        android:icon="@drawable/search"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:title="@string/main_btm_nav_search_title" />
+
+    <item
+        android:id="@+id/menu_main_btm_nav_my_bookshelf"
+        android:icon="@drawable/mybookshelf"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:title="@string/main_btm_nav_my_bookshelf_title" />
+
+    <item
+        android:id="@+id/menu_main_btm_nav_my_page"
+        android:icon="@drawable/mypage"
+        app:showAsAction="always"
+        android:enabled="true"
+        android:title="@string/main_btm_nav_my_page_title" />
+
+</menu>
