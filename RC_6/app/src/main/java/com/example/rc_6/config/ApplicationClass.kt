@@ -44,18 +44,7 @@ class ApplicationClass : Application() {
             )
         // 레트로핏 인스턴스 생성
 //        initRetrofitInstance()
-
-         sRetrofit = Retrofit.Builder()
-            .baseUrl(Url.KAKAO_API_BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        sRetrofit = Retrofit.Builder()
-            .baseUrl(Url.AIR_KOREA_API_BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-//        kakaoRetrofitInstance()
+        kakaoRetrofitInstance()
 //        AirRetrofitInstance()
     }
 
