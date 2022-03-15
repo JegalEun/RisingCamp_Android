@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:networkSecurityConfig="@xml/network_security_config"
         android:supportsRtl="true"
-        android:theme="@style/Theme.RC_6">
+        android:theme="@style/Theme.RC_6"
+        android:name=".config.ApplicationClass">
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

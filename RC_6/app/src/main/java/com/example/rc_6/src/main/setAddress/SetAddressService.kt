@@ -1,5 +1,6 @@
 package com.example.rc_6.src.main.setAddress
 
+import android.util.Log
 import com.example.rc_6.config.ApplicationClass
 import com.example.rc_6.src.main.setAddress.models.AirKoreaApiInerface
 import com.example.rc_6.src.main.setAddress.models.KakaoLocalInterface
@@ -18,10 +19,13 @@ class SetAddressService(val view : SetAddressActivityView) {
         tmRetrofitInterface.getTmCoordinates(latitude, longtitude).enqueue(object : Callback<TmCoordinatesResponse> {
             override fun onResponse(call: Call<TmCoordinatesResponse>, response: Response<TmCoordinatesResponse>) {
                 view.onGetTmSuccess(response.body() as TmCoordinatesResponse)
+
+                Log.d("SetAddressService", response.toString())
             }
 
             override fun onFailure(call: Call<TmCoordinatesResponse>, t: Throwable) {
                 view.onGetTmFailure(t.message ?: "통신 오류")
+                Log.d("SetAddressService", t.toString())
             }
         })
     }

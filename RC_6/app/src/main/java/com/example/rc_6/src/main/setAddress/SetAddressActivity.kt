@@ -188,7 +188,8 @@ class SetAddressActivity : BaseActivity<ActivitySetAddressBinding>(ActivitySetAd
             tm_x = tm.x!!
             tm_y = tm.y!!
         }
-        showCustomToast("Get TM 성공")
+        Log.d("Get Tm 성공","성공")
+//        showCustomToast("Get TM 성공")
     }
 
     override fun onGetTmFailure(message: String) {
@@ -238,8 +239,6 @@ class SetAddressActivity : BaseActivity<ActivitySetAddressBinding>(ActivitySetAd
 
             //경도,위도 가져오기
             SetAddressService(this).tryGetTm(location.latitude, location.longitude)
-            Log.d("latitude",location.latitude.toString())
-            Log.d("longitude",location.longitude.toString())
             //근처 미세먼지 측정장소 가져오기
             SetAddressService(this).tryGetStation(tm_x, tm_y)
             Log.d("tm_x", tm_x.toString())
@@ -249,10 +248,11 @@ class SetAddressActivity : BaseActivity<ActivitySetAddressBinding>(ActivitySetAd
             Log.d("near_station", near_station)
 
             binding.tvAddressDetail.text = add
+            binding.tvAirQuality.setText("미세먼지"+ air_quality+khaiGrade)
 
-            khaiGrade.let { khaiGrade ->
-                binding.tvAirQuality.setText("미세먼지"+ air_quality+khaiGrade)
-            }
+//            khaiGrade.let { khaiGrade ->
+//                binding.tvAirQuality.setText("미세먼지"+ air_quality+khaiGrade)
+//            }
         }
 
     }
@@ -272,7 +272,7 @@ class SetAddressActivity : BaseActivity<ActivitySetAddressBinding>(ActivitySetAd
         private var tm_y : Double = 0.0
         private var near_station : String = ""
         private var add : String = ""
-        private lateinit var khaiGrade : String
+        private var khaiGrade : String = ""
         private var air_quality : String = ""
 
     }
