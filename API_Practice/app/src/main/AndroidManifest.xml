@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.API_Practice"
         android:name=".config.ApplicationClass">
-        <activity android:name=".src.MainActivity"
+        <activity android:name=".src.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".src.MainActivity"/>
     </application>
 
 </manifest>

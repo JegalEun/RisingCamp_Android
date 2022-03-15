@@ -14,18 +14,6 @@ class NowService(val view: NowFragmentView) {
         homeRetrofitInterface.getBestSellerBooks("7703A01321B66BCE78A4AE11E5C4B9CBD9600091F1C3DB5A9446E6EB42B238B0").enqueue(object : Callback<BestSellerDto> {
             override fun onResponse(call: Call<BestSellerDto>, response: Response<BestSellerDto>) {
                 view.onGetBestSellerSuccess(response.body() as BestSellerDto)
-
-                if(!response.isSuccessful.not()){
-                    return
-                }
-
-                response.body()?.let{
-                    Log.d(TAG, it.toString())
-
-                    it.books.forEach { book ->
-                        Log.d(TAG, book.toString())
-                    }
-                }
             }
 
             override fun onFailure(call: Call<BestSellerDto>, t: Throwable) {

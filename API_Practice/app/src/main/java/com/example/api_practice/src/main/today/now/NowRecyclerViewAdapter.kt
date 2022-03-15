@@ -1,74 +1,60 @@
-package com.example.api_practice.src.main.today.now
+package com.example.api_practice.src.main.search
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.api_practice.R
+import com.bumptech.glide.Glide
+import com.example.api_practice.databinding.RvHomeTabNowItemBinding
+import com.example.api_practice.databinding.RvSearchItemBinding
+import com.example.api_practice.src.main.today.now.BookData
+import com.example.api_practice.src.main.today.now.models.Book
 
-class NowRecyclerViewAdapter(private val context: Context, private val dataList : ArrayList<BookData>) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+//class NowRecyclerViewAdapter(private val dataList: ArrayList<BookData>) : ListAdapter<Book, NowRecyclerViewAdapter.BookItemViewHolder>(diffUtil) {
+class NowRecyclerViewAdapter(private val dataList: ArrayList<BookData>) : RecyclerView.Adapter<NowRecyclerViewAdapter.BookItemViewHolder>() {
 
+    lateinit var binding: RvHomeTabNowItemBinding
 
-    private val TYPE_ITEM : Int = 1
-    private val TYPE_FOOTER : Int = 2
+    inner class BookItemViewHolder(private val binding : RvHomeTabNowItemBinding) : RecyclerView.ViewHolder(binding.root){
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when(viewType) {
-            TYPE_FOOTER -> {
-                val view = LayoutInflater.from(context).inflate(R.layout.rv_home_tab_now_footer, parent, false)
-                FooterViewHolder(view)
-            }
-            else -> {
-                val view =  LayoutInflater.from(context).inflate(R.layout.rv_home_tab_now_item, parent, false)
-                ListViewHolder(view)
-            }
-
-        }
-
-    }
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder) {
-            is FooterViewHolder -> {
-                holder.itemView.setOnClickListener {
-                    Log.d("푸터 눌렸을 때","눌렸을때")
-                }
-            }
-            else -> {
-                val item = dataList[position]
-                holder.itemView.apply {
-                    val itemViewHolder: ListViewHolder = holder as ListViewHolder
-                    itemViewHolder.bind(item)
-                }
-            }
+        fun bind(data: BookData) {
+            binding.tvBookName.text = data.booktitle
+            Glide
+                .with(binding.ivBook.context)
+                .load(data.img)
+                .into(binding.ivBook)
         }
     }
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookItemViewHolder {
+        // viewholder를 생성하는 부분
+        binding = RvHomeTabNowItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return BookItemViewHolder(binding)
+    }
 
-    // 아이템의 타입을 반환 (position은 0 기반이므로 (전체 갯수 - 1) 일 경우에 Footer 타입 반환)
-    override fun getItemViewType(position: Int): Int {
-        return when (position) {
-            itemCount -1 -> TYPE_FOOTER
-            else -> TYPE_ITEM } }
+    // 데이터를 그려주게되는 함수
+    override fun onBindViewHolder(holder: BookItemViewHolder, position: Int) {
+        Log.d("ddddd","dddd")
+        holder.bind(dataList[position])
+    }
 
+    override fun getItemCount(): Int {
+        return dataList.size
+    }
 
-    // 아이템의 전체 갯수 + 헤더(1) + 풋터(1) 지금은 풋터만 사용하므로 +1만 해줌.
-    override fun getItemCount(): Int = dataList.size+1
+    companion object {
+        val diffUtil = object : DiffUtil.ItemCallback<Book>() {
+            override fun areItemsTheSame(oldItem: Book, newItem: Book): Boolean {
+                return oldItem == newItem
+            }
 
-    // footer에 따른 viewHolder class 추가
-    class FooterViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView)
-
-
-    inner class ListViewHolder(layout: View): RecyclerView.ViewHolder(layout) {
-        private val txtName: TextView = itemView.findViewById(R.id.tv_book_name)
-
-        fun bind(item: BookData) {
-            txtName.text = item.booktitle
+            override fun areContentsTheSame(oldItem: Book, newItem: Book): Boolean {
+                return oldItem.id == newItem.id
+            }
         }
     }
+
 
 }
