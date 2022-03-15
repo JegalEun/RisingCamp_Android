@@ -1,12 +1,15 @@
 package com.example.api_practice.src.main.today.now
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.api_practice.R
 import com.example.api_practice.config.BaseFragment
 import com.example.api_practice.databinding.FragmentFragmentNowBinding
+import com.example.api_practice.src.main.search.SearchBookAdapter
 import com.example.api_practice.src.main.search.models.SearchBookDto
 import com.example.api_practice.src.main.today.now.models.BestSellerDto
 
@@ -16,6 +19,7 @@ class NowFragment : BaseFragment<FragmentFragmentNowBinding>(FragmentFragmentNow
 , NowFragmentView {
 
     private lateinit var recyclerViewAdapter: NowRecyclerViewAdapter
+    private lateinit var bookAdapter : SearchBookAdapter
     var dataList = ArrayList<BookData>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,8 +31,9 @@ class NowFragment : BaseFragment<FragmentFragmentNowBinding>(FragmentFragmentNow
         dataList.add(BookData("책"))
         dataList.add(BookData("책"))
 
-        recyclerViewAdapter = NowRecyclerViewAdapter(this.requireActivity(), dataList)
-        binding.rvBookList.adapter = recyclerViewAdapter
+//        recyclerViewAdapter = NowRecyclerViewAdapter(this.requireActivity(), dataList)
+//        binding.rvBookList.adapter = recyclerViewAdapter
+        initBestSellerRecycelrView()
 
         NowService(this).tryGetBestSellerBooks()
 
@@ -43,18 +48,23 @@ class NowFragment : BaseFragment<FragmentFragmentNowBinding>(FragmentFragmentNow
     }
 
     override fun onGetBestSellerSuccess(response: BestSellerDto) {
-        TODO("Not yet implemented")
+        bookAdapter.submitList(response.books)
+//        for (book in response.books) {
+//            Log.d("BestSeller", book.toString())
+//        }
     }
 
     override fun onGetBestSellerFailure(message: String) {
-        TODO("Not yet implemented")
     }
 
     override fun onGetSearchBookSuccess(response: SearchBookDto) {
-        TODO("Not yet implemented")
     }
 
     override fun onGetSearchBookFailure(message: String) {
-        TODO("Not yet implemented")
+    }
+
+    fun initBestSellerRecycelrView() {
+        bookAdapter = SearchBookAdapter()
+        binding.rvBookList.adapter = bookAdapter
     }
 }

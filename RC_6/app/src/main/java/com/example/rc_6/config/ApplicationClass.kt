@@ -39,6 +39,7 @@ class ApplicationClass : Application() {
     override fun onCreate() {
         // 레트로핏 인스턴스 생성
         kakaoRetrofitInstance()
+        AirRetrofitInstance()
         super.onCreate()
         sSharedPreferences =
             applicationContext.getSharedPreferences("SOFTSQUARED_TEMPLATE_APP",

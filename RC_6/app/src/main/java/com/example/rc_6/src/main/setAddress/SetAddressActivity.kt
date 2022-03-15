@@ -204,10 +204,10 @@ class SetAddressActivity : BaseActivity<ActivitySetAddressBinding>(ActivitySetAd
             add = station.addr.toString()
         }
         showCustomToast("Get station 성공")
+        Log.d("Get station 성공","성공")
     }
 
     override fun onGetStationFailure(message: String) {
-        TODO("Not yet implemented")
     }
 
     // 근처 측정소에서 대기질 정보 가져오기
@@ -220,7 +220,6 @@ class SetAddressActivity : BaseActivity<ActivitySetAddressBinding>(ActivitySetAd
     }
 
     override fun onGetAirQualityFailure(message: String) {
-        TODO("Not yet implemented")
     }
 
 
@@ -238,9 +237,11 @@ class SetAddressActivity : BaseActivity<ActivitySetAddressBinding>(ActivitySetAd
             Log.d("longitude",location.longitude.toString())
 
             //경도,위도 가져오기
-            SetAddressService(this).tryGetTm(location.latitude, location.longitude)
+//            SetAddressService(this).tryGetTm(location.latitude, location.longitude)
+//            Log.d("tm_x", tm_x.toString())
+//            Log.d("tm_y", tm_y.toString())
             //근처 미세먼지 측정장소 가져오기
-            SetAddressService(this).tryGetStation(tm_x, tm_y)
+            SetAddressService(this).tryGetStation(location.latitude, location.longitude)
             Log.d("tm_x", tm_x.toString())
             Log.d("tm_y", tm_y.toString())
             //측정장소에서 미세먼지 결과 가져오기
