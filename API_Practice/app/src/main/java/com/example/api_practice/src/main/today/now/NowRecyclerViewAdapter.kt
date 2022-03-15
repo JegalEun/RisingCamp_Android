@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.api_practice.R
-import com.example.api_practice.databinding.RvHomeTabNowItemBinding
 
 class NowRecyclerViewAdapter(private val context: Context, private val dataList : ArrayList<BookData>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -17,24 +16,18 @@ class NowRecyclerViewAdapter(private val context: Context, private val dataList 
     private val TYPE_ITEM : Int = 1
     private val TYPE_FOOTER : Int = 2
 
-    // 전역변수
-//    companion object {
-//        lateinit var binding: RvHomeTabNowItemBinding
-//    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType) {
             TYPE_FOOTER -> {
-                val view = LayoutInflater.from(parent.context).inflate(R.layout.rv_home_tab_now_footer, parent, false)
+                val view = LayoutInflater.from(context).inflate(R.layout.rv_home_tab_now_footer, parent, false)
                 FooterViewHolder(view)
             }
             else -> {
-                val view =  LayoutInflater.from(parent.context).inflate(R.layout.rv_home_tab_now_item, parent, false)
+                val view =  LayoutInflater.from(context).inflate(R.layout.rv_home_tab_now_item, parent, false)
                 ListViewHolder(view)
             }
 
         }
-       // binding = RvHomeTabNowItemBinding.inflate(LayoutInflater.from(context), parent, false)
 
     }
 
@@ -63,13 +56,14 @@ class NowRecyclerViewAdapter(private val context: Context, private val dataList 
             else -> TYPE_ITEM } }
 
 
-    // 아이템의 전체 갯수 + 헤더(1) + 풋터(1) 지금은 풋터만 사용.
+    // 아이템의 전체 갯수 + 헤더(1) + 풋터(1) 지금은 풋터만 사용하므로 +1만 해줌.
     override fun getItemCount(): Int = dataList.size+1
 
+    // footer에 따른 viewHolder class 추가
     class FooterViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView)
 
 
-    inner class ListViewHolder(val layout: View): RecyclerView.ViewHolder(layout) {
+    inner class ListViewHolder(layout: View): RecyclerView.ViewHolder(layout) {
         private val txtName: TextView = itemView.findViewById(R.id.tv_book_name)
 
         fun bind(item: BookData) {
