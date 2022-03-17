@@ -36,6 +36,7 @@ class ApplicationClass : Application() {
         // 레트로핏 인스턴스 생성
         initRetrofitInstance()
         bestSellerretrofitInstance()
+        searchBooksretrofitInstance()
         super.onCreate()
         sSharedPreferences =
             applicationContext.getSharedPreferences("SOFTSQUARED_TEMPLATE_APP", MODE_PRIVATE)
@@ -63,6 +64,13 @@ class ApplicationClass : Application() {
     }
 
     private fun bestSellerretrofitInstance() {
+        sRetrofit = Retrofit.Builder()
+            .baseUrl("https://book.interpark.com")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    private fun searchBooksretrofitInstance() {
         sRetrofit = Retrofit.Builder()
             .baseUrl("https://book.interpark.com")
             .addConverterFactory(GsonConverterFactory.create())

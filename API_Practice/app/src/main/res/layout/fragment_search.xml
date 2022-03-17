@@ -8,11 +8,14 @@
         android:id="@+id/et_search_book"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:lines="1"
+        android:inputType="text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_book_list"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,4 +23,16 @@
         app:layout_constraintTop_toBottomOf="@+id/et_search_book"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <TextView
+        android:id="@+id/tv_book_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/et_search_book"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/activity_top_margin"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="15sp"
+        android:text="@string/search_book_list"
+        android:visibility="gone"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

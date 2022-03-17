@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.api_practice.databinding.RvSearchItemBinding
 import com.example.api_practice.src.main.today.now.models.Book
 
@@ -15,11 +16,11 @@ class SearchBookAdapter(private val dataList: ArrayList<SearchBook>) : RecyclerV
     inner class BookSearchViewHolder(private val binding : RvSearchItemBinding) : RecyclerView.ViewHolder(binding.root){
 
         fun bind(data: SearchBook) {
-//            binding.tvBookTitle.text = data
-//            Glide
-//                .with(binding..context)
-//                .load(data.img)
-//                .into(binding.ivBook)
+            binding.tvBookTitle.text = data.title
+            Glide
+                .with(binding.ivBookImg.context)
+                .load(data.img)
+                .into(binding.ivBookImg)
         }
     }
 

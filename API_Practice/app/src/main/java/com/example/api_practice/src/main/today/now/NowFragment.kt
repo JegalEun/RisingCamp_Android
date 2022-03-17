@@ -27,7 +27,6 @@ class NowFragment : BaseFragment<FragmentFragmentNowBinding>(FragmentFragmentNow
 , NowFragmentView {
 
     private lateinit var recyclerViewAdapter: NowRecyclerViewAdapter
-    private lateinit var bookAdapter : SearchBookAdapter
     var dataList = ArrayList<BookData>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
