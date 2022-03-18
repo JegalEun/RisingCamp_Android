@@ -1,10 +1,10 @@
 package com.example.api_practice.src
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.api_practice.R
 import com.example.api_practice.config.BaseActivity
 import com.example.api_practice.databinding.ActivityMainBinding
+import com.example.api_practice.src.main.bookshelf.BookShelfFragment
 import com.example.api_practice.src.main.myPage.MyPageFragment
 import com.example.api_practice.src.main.search.SearchFragment
 import com.example.api_practice.src.main.today.TodayFragment
@@ -34,6 +34,12 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
                     R.id.menu_main_btm_nav_search -> {
                         supportFragmentManager.beginTransaction()
                             .replace(R.id.main_frm, SearchFragment())
+                            .commitAllowingStateLoss()
+                        return@OnNavigationItemSelectedListener true
+                    }
+                    R.id.menu_main_btm_nav_my_bookshelf -> {
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.main_frm, BookShelfFragment())
                             .commitAllowingStateLoss()
                         return@OnNavigationItemSelectedListener true
                     }

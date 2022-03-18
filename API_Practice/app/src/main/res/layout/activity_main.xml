@@ -11,14 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="?attr/actionBarSize" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_frm"
-        app:layout_constraintBottom_toTopOf="@id/main_btm_nav"
-        android:background="@color/guide_line"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/main_btm_nav"

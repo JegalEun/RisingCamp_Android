@@ -13,6 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.API_Practice"
         android:name=".config.ApplicationClass">
+
+<!--        <meta-data-->
+<!--            android:name="com.naver.maps.map.CLIENT_ID"-->
+<!--            android:value="jme0dtolkz" />-->
+
         <activity android:name=".src.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
